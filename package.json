@@ -5,5 +5,9 @@
   "main": "index.js",
   "repository": "https://github.com/Dynamic-Flakes/E-Cert-Dapp.git",
   "author": "melitus <asmelitus@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "ganache": "truffle migrate --network development",
+    "console":"truffle console --network development"
+  }
 }
