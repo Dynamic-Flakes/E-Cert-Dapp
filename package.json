@@ -1,0 +1,9 @@
+{
+  "name": "E-Cert-Dapp",
+  "version": "1.0.0",
+  "description": "This is a decentralised platform to generate and store hash of a document on-chain",
+  "main": "index.js",
+  "repository": "https://github.com/Dynamic-Flakes/E-Cert-Dapp.git",
+  "author": "melitus <asmelitus@gmail.com>",
+  "license": "MIT"
+}
