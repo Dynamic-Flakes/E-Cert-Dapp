@@ -7,7 +7,7 @@
   "author": "melitus <asmelitus@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "ganache": "truffle migrate --network development",
+    "migrate": "truffle migrate --network development",
     "console":"truffle console --network development"
   }
 }
