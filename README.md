@@ -9,15 +9,20 @@
  ### Users:
 There are 3 types of users the system provides support to:
 
- - Educator: This is the certifying authority, which registers new certificates, then issues the desired recipient that certificate.
- - Student: This is the recipient of the certificate. It first registers itself in the system, then sends its address to the issuer, to get the certificate issued.
- - Verifier: This can be any anonymous user, which wants to verify the recipient’s certificate.
+ - Educator: This is the certifying authority, which registers new certificates, then issues the desired student that certificate.
+ - Student: This is the recipient of the certificate. It first registers itself in the system. He request for a certificate after a course is finished and the stored on-chain
+ - Verifier: This can be any anonymous user, which wants to verify the student's certificate.
 
  ### Events:
 Events are the logs of all the transactions done in the blockchain. So for every function of the smart contract, we log its details in events. Our system tracks these events:
 
  - HashAdded: logs details of every hash added to an address registered.
 
+### Process Flow:
+ - Certificate will be received on the ui, a unique hash will be generated
+ - The generated hash will be stored in the blockchain
+ - The certificate data can be read and verified by the blockchain
+ - The verifier can simple access the certifications of the student for verification.
 
 ## Technology stack:
 
