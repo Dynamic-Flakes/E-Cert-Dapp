@@ -16,7 +16,8 @@ There are 3 types of users the system provides support to:
  ### Events:
 Events are the logs of all the transactions done in the blockchain. So for every function of the smart contract, we log its details in events. Our system tracks these events:
 
- - HashAdded: logs details of every hash added to an address registered.
+ - HashAdded: Ths event is triggered when a hashed is stored on-chain. It logs details of every hash added to an address registered.
+ - HashVerified: This Event is triggered when when a document is verified
 
 ### Process Flow:
  - Certificate will be received on the ui, a unique hash will be generated
@@ -26,12 +27,15 @@ Events are the logs of all the transactions done in the blockchain. So for every
 
 ## Technology stack:
 
- - Truffle (development framework for dapps based on the Ethereum blockchain: https://truffleframework.com/),
- - Ganache (one click, in-memory blockchain: https://truffleframework.com/ganache),
- - Solidity (contract-oriented programming language for writing smart contracts: https://solidity.readthedocs.io/en/v0.4.24/),
- - Web3.js (Ethereum JavaScript API: https://github.com/ethereum/web3.js/),
- - NodeJS (JavaScript run-time environment: https://nodejs.org/en/),
- - Angular (TypeScript-based open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations: https://angular.io/).
+ - Truffle - ( development framework for dapps based on the Ethereum blockchain: https://truffleframework.com/),
+ - Ganache - ( A personal blockchain for Ethereum development that can be used to deploy contracts, develop applications, and run tests: https://truffleframework.com/ganache),
+ - Solidity - (contract-oriented programming language for writing smart contracts: https://solidity.readthedocs.io/en/v0.4.24/),
+ - Web3.js - (Ethereum JavaScript API: https://github.com/ethereum/web3.js/)
+
+ - MetaMask - (A browser plugin which allows users to make transactions to Ethereum or other networks through browsers, eliminating the need for dedicated user interfaces for Ethereum or other networks: https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en)
+
+ - NodeJS - (An open source and cross-platform runtime environment for executing JavaScript code outside of a browser: https://nodejs.org/en/),
+ - Angular - (TypeScript-based open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations: https://angular.io/).
 
  ## Set Up
  ### Install truffle
