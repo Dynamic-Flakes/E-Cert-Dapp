@@ -64,7 +64,7 @@ contract CertificateRegistry is Ownable {
 
         documentRegistry[_documentHash] = docInfo;
 
-        // creates the event, to be used to query all the certificates
+        // creates the event, to be used to query all the store hash of the certificates
         emit HashAdded(msg.sender, _documentHash, block.timestamp, true);
     }
 
