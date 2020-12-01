@@ -4,46 +4,49 @@ pragma solidity >=0.4.22 <0.8.0;
  * @title Ownable
  * @dev The Ownable contract has an owner address, and provides basic authorization control
  * functions, this simplifies the implementation of "user permissions".
-  * Provides onlyOwner modifier, which prevents function from running if it is called by anyone other than the owner.
+ * Provides onlyOwner modifier, which prevents function from running if it is called by anyone other than the owner.
  */
- contract Ownable {
+contract Ownable {
     address public owner;
     address public educator;
     address public student;
-    uint public value;
+    address public verifier;
 
-/**
-   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-   * account.
-   */
-    constructor() {
+    uint256 public value;
+
+    // event for EVM logging
+    event OwnerSet(address indexed oldOwner, address indexed newOwner);
+
+    /**
+     * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+     * account.
+     */
+    constructor() public {
         owner = msg.sender;
+        emit OwnerSet(address(0), owner);
     }
 
-// Events
-  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    // Events
+    event OwnershipTransferred(
+        address indexed previousOwner,
+        address indexed newOwner
+    );
 
-/**
-   * @dev Throws if called by any account other than the owner.
-   */
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
     modifier onlyOwner() {
         require(isOwner(), "Access Denied");
         _;
     }
 
-  modifier onlyEducator() {
-        require(
-            isEducator(),
-            "Only educator can call this."
-        );
+    modifier onlyEducator() {
+        require(isEducator(), "Only educator can call this.");
         _;
     }
 
     modifier onlyStudent() {
-        require(
-            isStudent(),
-            "Only student can call this."
-        );
+        require(isStudent(), "Only student can call this.");
         _;
     }
 
@@ -54,19 +57,21 @@ pragma solidity >=0.4.22 <0.8.0;
     function isEducator() public view returns (bool) {
         return msg.sender == owner;
     }
+
     function isStudent() public view returns (bool) {
         return msg.sender == student;
     }
+
     function isVerifier() public view returns (bool) {
         return msg.sender == educator;
     }
     /*
-   * @dev Allows the current owner to transfer control of the contract to a newOwner.
-   * @param newOwner The address to transfer ownership to.
-   */
-//   function transferOwnership(address newOwner) public onlyOwner {
-//     require(newOwner != address(0));
-//    emit  OwnershipTransferred(owner, newOwner);
-//     owner = newOwner;
-//   }
+     * @dev Allows the current owner to transfer control of the contract to a newOwner.
+     * @param newOwner The address to transfer ownership to.
+     */
+    //   function transferOwnership(address newOwner) public onlyOwner {
+    //     require(newOwner != address(0));
+    //    emit  OwnershipTransferred(owner, newOwner);
+    //     owner = newOwner;
+    //   }
 }
