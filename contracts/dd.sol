@@ -1,8 +1,4 @@
-pragma solidity >=0.4.22 <0.8.0;
-
-import "./Ownable.sol";
-
-contract CertificateRegistry is Ownable {
+contract CertificateRegistry {
     /**
      * The Certificate Document info structure: every certificate info is composed of:
      * - documentHash: Hash of the document generated off-chain
@@ -52,7 +48,6 @@ contract CertificateRegistry is Ownable {
      */
     function storeHash(string memory _documentHash)
         public
-        onlyOwner
         noHashExistsYet(_documentHash)
     {
         DocumentInfo memory docInfo = DocumentInfo({
