@@ -1,5 +1,4 @@
 const CertificateRegistry = artifacts.require('./CertificateRegistry.sol')
-const truffleAssert = require('truffle-assertions');
 require('chai')
   .use(require('chai-as-promised'))
   .should()
@@ -11,7 +10,6 @@ contract('CertificateRegistry', ([deployer, student, verifier]) => {
   let certificateRegistryInstance
 
   const hash1 = '93920e3267341a720b3ff1560435893456044b651ccb98538a52fbaf3ca6bce2'
-  const hash2 = '9dcaede8fd07cf1a3dfcd72e45278abe5a5cdf1ea6d6c80fc2bf4d9d365e14e5'
   const _timeOfIssue = 1542652349;
   const _isStored = false
 
@@ -21,7 +19,7 @@ contract('CertificateRegistry', ([deployer, student, verifier]) => {
   })
 
 describe('deployment', async () => {
-    it('deploys successfully', async () => {
+    it('should deploys successfully', async () => {
       const address = await certificateRegistryInstance.address
       assert.ok(address)
       assert.notEqual(address, 0x0)
@@ -30,7 +28,7 @@ describe('deployment', async () => {
       assert.notEqual(address, undefined)
     })
 
-    it('should have an owner', async () => {
+    it('should sets the owner properly', async () => {
       const contractOwner = await certificateRegistryInstance.owner()
       assert.equal(contractOwner, deployer, 'has an owner')
     })
@@ -50,7 +48,7 @@ describe('deployment', async () => {
       assert.equal(event.issuer, deployer, 'issuer is correct')
       assert.equal(event.documentHash, hash1, 'hash1 is correct')
       assert.equal(event._timeOfIssue, block.number, 'time is correct')
-      assert.equal(event.isStored, true, 'isStored is correct')
+      assert.equal(event.isStored, true, 'hash is not stored')
 
       // FAILURE: Hash must have a value
       await certificateRegistryInstance.storeHash('', { from: deployer }).should.be.rejected;
@@ -66,25 +64,20 @@ describe('deployment', async () => {
     })
 
     it('should not add hash when hash already exists', async () => {
-      await certificateRegistryInstance.storeHash(hash1);
-      await truffleAssert.fails(
-        certificateRegistryInstance.add(hash1),
-        truffleAssert.ErrorType.REVERT,
-        "this hash already exists in contract"
+      await expect(certificateRegistryInstance.storeHash(hash1)).to.be.rejectedWith(
+        hash1,
+        "Duplicate hash was not rejected"
       );
     });
 
    it('should not store hash when user is not owner', async () => {
-      await truffleAssert.fails(
-        certificateRegistryInstance.storeHash(hash1, {from: deployer}),
-        truffleAssert.ErrorType.REVERT,
-        "Access Denied"
-      );
+    await certificateRegistryInstance.storeHash(hash1, { from: student }).should.be.rejected;
+    await certificateRegistryInstance.storeHash(hash1, { from: verifier }).should.be.rejected;
     });
 
-    it('should verify hash to be valid or not', async () => {
+    it('should return true for valid document hash', async () => {
     const validHash = await certificateRegistryInstance.verifyCertificate(hash1)
-    assert.equal(validHash, true, 'hash1 is verified')
+    assert.strictEqual(validHash, true, 'Document hash is valid')
     });
   })
 })

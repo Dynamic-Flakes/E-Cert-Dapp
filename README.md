@@ -17,7 +17,7 @@ There are 3 types of users the system provides support to:
  ### Events:
 Events are the logs of all the transactions done in the blockchain. So for every function of the smart contract, we log its details in events. Our system tracks these events:
 
- - HashAdded: Ths event is triggered when a hashed is stored on-chain. It logs details of every hash added to an address registered.
+ - NewHashStored: Ths event is triggered when a hashed is stored on-chain. It logs details of every hash added to an address registered.
  - HashVerified: This Event is triggered when when a document is verified
 
 ### Process Flow:
