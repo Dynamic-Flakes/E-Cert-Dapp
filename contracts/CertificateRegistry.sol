@@ -52,7 +52,6 @@ contract CertificateRegistry is Ownable {
      */
     function storeHash(string memory _documentHash)
         public
-        onlyOwner
         noHashExistsYet(_documentHash)
     {
         DocumentInfo memory docInfo = DocumentInfo({
@@ -68,7 +67,22 @@ contract CertificateRegistry is Ownable {
         emit HashAdded(msg.sender, _documentHash, block.timestamp, true);
     }
 
-    function readHashedCertificate(string memory _hash)
+    function verifyCertificate(string memory _documenteHash)
+        public
+        view
+        returns (bool)
+    {
+        bool test = stringsEqual(
+            documentRegistry[_documenteHash].documentHash,
+            _documenteHash
+        );
+        if (test) {
+            return true;
+        }
+        return false;
+    }
+
+    function getCertificateInfo(string memory _hash)
         public
         view
         doesHashExist(_hash)
@@ -93,5 +107,18 @@ contract CertificateRegistry is Ownable {
         returns (bool)
     {
         return documentRegistry[_documentHash].isStored == false;
+    }
+
+    function stringsEqual(string storage _a, string memory _b)
+        internal
+        view
+        returns (bool)
+    {
+        bytes storage a = bytes(_a);
+        bytes memory b = bytes(_b);
+        if (a.length != b.length) {
+            return false;
+        }
+        return true;
     }
 }
