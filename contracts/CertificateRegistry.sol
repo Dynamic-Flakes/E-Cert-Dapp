@@ -23,7 +23,7 @@ contract CertificateRegistry is Ownable {
     mapping(string => DocumentInfo) private documentRegistry;
 
     // event for EVM logging
-    event HashAdded(
+    event NewHashStored(
         address indexed issuer,
         string documentHash,
         uint256 timeOfIssue,
@@ -47,6 +47,8 @@ contract CertificateRegistry is Ownable {
         public
         HashAlreadyExist(_documentHash)
     {
+        require(bytes(_documentHash).length == 46);
+
         DocumentInfo memory docInfo = DocumentInfo({
             documentHash: _documentHash,
             issuer: msg.sender,
@@ -57,7 +59,7 @@ contract CertificateRegistry is Ownable {
         documentRegistry[_documentHash] = docInfo;
 
         // creates the event, to be used to query all the store hash of the certificates
-        emit HashAdded(msg.sender, _documentHash, block.number, true);
+        emit NewHashStored(msg.sender, _documentHash, block.number, true);
     }
 
     function verifyCertificate(string memory _documenteHash)
@@ -65,6 +67,8 @@ contract CertificateRegistry is Ownable {
         view
         returns (bool)
     {
+        require(bytes(_documenteHash).length == 46);
+
         bool test = stringsEqual(
             documentRegistry[_documenteHash].documentHash,
             _documenteHash
@@ -113,4 +117,6 @@ contract CertificateRegistry is Ownable {
         }
         return true;
     }
+
+    // Note, swithc string to bytes32 to reduce gas cost if the file is hashed with         institutionHash = keccak256(abi.encodePacked(block.number, now, msg.data));
 }
