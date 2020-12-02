@@ -2,16 +2,17 @@
  ## Introduction
 
  ### Checks:
- - Only registered user (educator/ verifier) can register certificates , issue certificates, be issued certificates or view certificates.
+ - Only educator can register certificates and issue certificates.
  - The certificate which is to be issued, must be registered first.
  - No single user can register twice.
+ - No hash of a certificate can exist more than one
 
  ### Users:
 There are 3 types of users the system provides support to:
 
  - Educator: This is the certifying authority, which registers new certificates, then issues the desired student that certificate.
  - Student: This is the recipient of the certificate. It first registers itself in the system. He request for a certificate after a course is finished and the stored on-chain
- - Verifier: This can be any anonymous user, which wants to verify the student's certificate.
+ - Verifier: This can be any anonymous user, who wants to verify the student's certificate.
 
  ### Events:
 Events are the logs of all the transactions done in the blockchain. So for every function of the smart contract, we log its details in events. Our system tracks these events:
@@ -24,6 +25,23 @@ Events are the logs of all the transactions done in the blockchain. So for every
  - The generated hash will be stored in the blockchain
  - The certificate data can be read and verified by the blockchain
  - The verifier can simple access the certifications of the student for verification.
+
+![Alt text](./diagrams/DAOM_E-Cert.jpg?raw=true "E-Cert Daom")
+
+### Milestone 1
+
+- 1. Get certificate data and sub-functions
+- 2. Verify certificate data and sub-functions.
+
+### Milestone 2:
+
+ - 1. Manage key and sub-functions
+ - 2. Integration with e-learning platform
+
+### Milestone 3:
+ - 1. Manage wallet and sub-functions
+ - 2. Deployment to permanent web server I will provide.
+
 
 ## Technology stack:
 
