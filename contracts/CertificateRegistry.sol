@@ -40,7 +40,7 @@ contract CertificateRegistry is Ownable {
     modifier doesHashExist(string memory _docHash) {
         require(
             documentRegistry[_docHash].isStored == true,
-            "Error: this hash does not exist already exists in contract"
+            "Error: this hash does not exist in contract"
         );
         _;
     }
