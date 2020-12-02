@@ -9,6 +9,11 @@
   "scripts": {
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
-    "console":"truffle console --network development"
+    "console": "truffle console --network development",
+    "test": "truffle test"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1"
   }
 }
