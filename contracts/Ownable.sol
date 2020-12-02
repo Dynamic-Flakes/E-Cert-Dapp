@@ -7,8 +7,7 @@ pragma solidity >=0.4.22 <0.8.0;
  * Provides onlyOwner modifier, which prevents function from running if it is called by anyone other than the owner.
  */
 contract Ownable {
-    address public owner;
-    address public educator;
+    address public contractOwner;
     address public student;
     address public verifier;
 
@@ -22,8 +21,8 @@ contract Ownable {
      * account.
      */
     constructor() public {
-        owner = msg.sender;
-        emit OwnerSet(address(0), owner);
+        contractOwner = msg.sender;
+        emit OwnerSet(address(0), contractOwner);
     }
 
     // Events
@@ -40,22 +39,13 @@ contract Ownable {
         _;
     }
 
-    modifier onlyEducator() {
-        require(isEducator(), "Only educator can call this.");
-        _;
-    }
-
     modifier onlyStudent() {
         require(isStudent(), "Only student can call this.");
         _;
     }
 
     function isOwner() public view returns (bool) {
-        return msg.sender == owner;
-    }
-
-    function isEducator() public view returns (bool) {
-        return msg.sender == owner;
+        return msg.sender == contractOwner;
     }
 
     function isStudent() public view returns (bool) {
@@ -63,7 +53,7 @@ contract Ownable {
     }
 
     function isVerifier() public view returns (bool) {
-        return msg.sender == educator;
+        return msg.sender == verifier;
     }
     /*
      * @dev Allows the current owner to transfer control of the contract to a newOwner.
@@ -71,7 +61,7 @@ contract Ownable {
      */
       function transferOwnership(address newOwner) public onlyOwner {
         require(newOwner != address(0));
-       emit  OwnershipTransferred(owner, newOwner);
-        owner = newOwner;
+       emit  OwnershipTransferred(contractOwner, newOwner);
+        contractOwner = newOwner;
       }
 }
