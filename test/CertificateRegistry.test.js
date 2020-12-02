@@ -29,7 +29,7 @@ describe('deployment', async () => {
     })
 
     it('should sets the owner properly', async () => {
-      const contractOwner = await certificateRegistryInstance.owner()
+      const contractOwner = await certificateRegistryInstance.contractOwner()
       assert.equal(contractOwner, deployer, 'has an owner')
     })
   })

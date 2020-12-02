@@ -8,6 +8,8 @@ contract CertificateRegistry is Ownable {
      * - documentHash: Hash of the document generated off-chain
      * - issuer: account of the institution that issue the document
      * - timeOfIssue - time the document hash was stored.
+    * - isStored - a flag to show that a hash is stored or not.
+
      */
     struct DocumentInfo {
         address issuer;
@@ -41,7 +43,7 @@ contract CertificateRegistry is Ownable {
     /*
      * Record a new hash request on behalf of a student
      * The sender of message call is the educator itself
-     * @param {string} _document Hash of the sutuednt submitted for storage on-chain
+     * @param {string} _documentHash: Hash of the sutuednt submitted for storage on-chain
      */
     function storeHash(string memory _documentHash)
         public
@@ -118,5 +120,5 @@ contract CertificateRegistry is Ownable {
         return true;
     }
 
-    // Note, swithc string to bytes32 to reduce gas cost if the file is hashed with         institutionHash = keccak256(abi.encodePacked(block.number, now, msg.data));
+    // Note, swithc string to bytes32 to reduce gas cost if the file is hashed with institutionHash = keccak256(abi.encodePacked(block.number, now, msg.data));
 }
