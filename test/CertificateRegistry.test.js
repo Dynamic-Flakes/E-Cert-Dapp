@@ -34,7 +34,7 @@ describe('deployment', async () => {
     })
   })
 
-  describe('certificates', async () => {
+  describe('store', async () => {
     let result
 
     before(async () => {
@@ -54,15 +54,6 @@ describe('deployment', async () => {
       await certificateRegistryInstance.storeHash('', { from: deployer }).should.be.rejected;
     })
 
-    it('get hash store on-chain', async () => {
-      const foundHash = await certificateRegistryInstance.getCertificateInfo(hash1)
-      console.log({foundHash})
-      assert.equal(foundHash.issuer, deployer, 'issuer is correct')
-      assert.equal(foundHash.documentHash, hash1, 'hash1 is correct')
-      assert.equal(foundHash._timeOfIssue, _timeOfIssue, 'time is correct')
-      assert.equal(foundHash.isStored, true, 'isStored is correct')
-    })
-
     it('should not add hash when hash already exists', async () => {
       await expect(certificateRegistryInstance.storeHash(hash1)).to.be.rejectedWith(
         hash1,
@@ -74,10 +65,36 @@ describe('deployment', async () => {
     await certificateRegistryInstance.storeHash(hash1, { from: student }).should.be.rejected;
     await certificateRegistryInstance.storeHash(hash1, { from: verifier }).should.be.rejected;
     });
+  })
 
+  describe('getStoredHash', async () => {
+    let foundHash
+
+    before(async () => {
+      foundHash = await await certificateRegistryInstance.getCertificateInfo(hash1)
+      console.log({foundHash})
+    })
+
+    it('get hash store on-chain', async () => {
+      const foundHash = await certificateRegistryInstance.getCertificateInfo(hash1)
+      console.log({foundHash})
+      assert.equal(foundHash.issuer, deployer, 'issuer is correct')
+      assert.equal(foundHash.documentHash, hash1, 'hash1 is correct')
+      assert.equal(foundHash._timeOfIssue, _timeOfIssue, 'time is correct')
+      assert.equal(foundHash.isStored, true, 'isStored is correct')
+    })
+  })
+
+  describe('verifyHash', async () => {
+    let validHash
+
+    before(async () => {
+      validHash = await certificateRegistryInstance.verifyCertificate(hash1)
+      console.log({validHash})
+    })
     it('should return true for valid document hash', async () => {
-    const validHash = await certificateRegistryInstance.verifyCertificate(hash1)
     assert.strictEqual(validHash, true, 'Document hash is valid')
     });
   })
+
 })
