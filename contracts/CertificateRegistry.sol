@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 pragma solidity >=0.4.22 <0.8.0;
 
 import "./Ownable.sol";
@@ -19,7 +21,7 @@ contract CertificateRegistry is Ownable {
     }
 
     /*
-      A mapping of the hash value to each student documentInfo
+      A mapping of the document hash to the documentinfo that was issued
       This mapping is used to keep track of every certification document initiated for every student by an educator.
      */
     mapping(string => DocumentInfo) private documentRegistry;
@@ -32,10 +34,18 @@ contract CertificateRegistry is Ownable {
         bool isStored
     );
 
-    modifier HashAlreadyExist(string memory _docHash) {
+    modifier onlyNotHashed(string memory _documentHash) {
         require(
-            isHashStored(_docHash),
-            "Error: this hash already exists in contract"
+            !isHashStored(_documentHash),
+            "Error: Only hashes that have not been hashed can be stored"
+        );
+        _;
+    }
+
+    modifier onlyHashValueNotEmpty(string memory _documentHash) {
+        require(
+            bytes(_documentHash).length > 0,
+            "Error: Error: hash value should not be empty"
         );
         _;
     }
@@ -47,7 +57,9 @@ contract CertificateRegistry is Ownable {
      */
     function storeHash(string memory _documentHash)
         public
-        HashAlreadyExist(_documentHash)
+        onlyOwner
+        onlyHashValueNotEmpty(_documentHash)
+        onlyNotHashed(_documentHash)
     {
         DocumentInfo memory docInfo = DocumentInfo({
             documentHash: _documentHash,
@@ -100,7 +112,7 @@ contract CertificateRegistry is Ownable {
         view
         returns (bool)
     {
-        return documentRegistry[_documentHash].isStored == false;
+        return documentRegistry[_documentHash].isStored == true;
     }
 
     function stringsEqual(string storage _a, string memory _b)

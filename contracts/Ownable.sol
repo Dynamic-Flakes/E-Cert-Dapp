@@ -7,9 +7,9 @@ pragma solidity >=0.4.22 <0.8.0;
  * Provides onlyOwner modifier, which prevents function from running if it is called by anyone other than the owner.
  */
 contract Ownable {
-    address public contractOwner;
-    address public student;
-    address public verifier;
+    address private contractOwner;
+    address private student;
+    address private verifier;
 
     uint256 public value;
 
@@ -20,7 +20,7 @@ contract Ownable {
      * @dev The Ownable constructor sets the original `owner` of the contract to the sender
      * account.
      */
-    constructor() public {
+    constructor() {
         contractOwner = msg.sender;
         emit OwnerSet(address(0), contractOwner);
     }
