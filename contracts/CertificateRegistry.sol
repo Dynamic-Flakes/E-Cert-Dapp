@@ -49,8 +49,6 @@ contract CertificateRegistry is Ownable {
         public
         HashAlreadyExist(_documentHash)
     {
-        require(bytes(_documentHash).length == 46);
-
         DocumentInfo memory docInfo = DocumentInfo({
             documentHash: _documentHash,
             issuer: msg.sender,
@@ -69,8 +67,6 @@ contract CertificateRegistry is Ownable {
         view
         returns (bool)
     {
-        require(bytes(_documenteHash).length == 46);
-
         bool test = stringsEqual(
             documentRegistry[_documenteHash].documentHash,
             _documenteHash
