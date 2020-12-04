@@ -1,0 +1,5 @@
+<div class="tab-content-wrapper search">
+    <!-- Busy -->
+    <!-- <span class="form-overlay" *ngIf="busy"><i class="la la-refresh icon-spin "></i></span> -->
+    <dynamic-form [float]="float_style" [config]="config" #form="dynamicForm" (submit)="submit($event)"></dynamic-form>
+</div>

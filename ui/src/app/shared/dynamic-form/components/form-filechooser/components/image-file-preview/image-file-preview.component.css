@@ -1,0 +1,25 @@
+.preview {
+    display: inline-flex;
+    border: 1px solid;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    width: auto;
+}
+
+.preview img {
+    display: block;
+    height: 50px;
+    /* width: 50px; */
+}
+
+.action-col {
+    text-align: right;
+    line-height: 1.5;
+    padding: 4px;
+    max-width: 430px;
+    overflow: hidden;
+}
+
+.action-col p {
+    line-height: 1.5;
+}

@@ -1,0 +1,35 @@
+.form-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    font-family: monospace;
+    font-size: 18px !important;
+    letter-spacing: -0.5px;
+    cursor: pointer;
+    background-color: #40ad79;
+    color: #fff;
+    outline: 0;
+    line-height: 1;
+    text-align: center;
+    padding: 12px 30px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 2px;
+    display: inline-block;
+    border: none;
+    transition: background-color .3s, box-shadow .3s;
+}
+
+button:hover {
+    background-color: red;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled {
+    background: rgb(81, 81, 81);
+    color: rgb(134, 134, 134);
+    cursor: not-allowed;
+    box-shadow: none;
+}

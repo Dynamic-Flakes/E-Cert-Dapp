@@ -1,0 +1,19 @@
+<app-main-layout>
+    <div class="document-wrap">
+        <div class="-tab-wrapper">
+            <div class="-tab-nav">
+                <ul class="-tab-group">
+                    <li class="-tab-trigger" routerLink="/cert/upload" [class.active]="viewMode == 'upload'" rel="upload" (click)="updateTitle('upload')">
+                        Upload
+                    </li>
+                    <li class="-tab-trigger" routerLink="/cert/search" [class.active]="viewMode == 'search'" rel="search" (click)="updateTitle('search')">
+                        Search
+                    </li>
+                </ul>
+                <span class="title">{{title}}</span>
+            </div>
+
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</app-main-layout>

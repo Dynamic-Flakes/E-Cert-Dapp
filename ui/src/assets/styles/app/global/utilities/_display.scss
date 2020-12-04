@@ -1,0 +1,19 @@
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .jx-d#{$infix}-none         { display: none !important; }
+    .jx-d#{$infix}-inline       { display: inline !important; }
+    .jx-d#{$infix}-inline-block { display: inline-block !important; }
+    .jx-d#{$infix}-block        { display: block !important; }
+    .jx-d#{$infix}-table        { display: table !important; }
+    .jx-d#{$infix}-table-row    { display: table-row !important; }
+    .jx-d#{$infix}-table-cell   { display: table-cell !important; }
+    .jx-d#{$infix}-flex         { display: flex !important; }
+    .jx-d#{$infix}-inline-flex  { display: inline-flex !important; }
+    .jx-d#{$infix}-grid  { display: grid !important; }
+    .jx-d#{$infix}-inline-grid  { display: inline-grid !important; }
+  }
+}
+  
+  
