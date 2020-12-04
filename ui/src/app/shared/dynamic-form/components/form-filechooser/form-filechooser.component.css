@@ -1,0 +1,92 @@
+:host {
+    width: 100%;
+}
+
+.drag-drop-wrapper {
+    display: grid;
+    border: 4px dashed #ff2b87;
+    margin: 20px 0;
+    padding: 20px 5px 40px 5px;
+}
+
+.drag-drop-wrapper.dragged-over {
+    border: 4px dashed #40ad79;
+    background: #333;
+}
+
+.drag-drop-wrapper>span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+span.-upload-btn {
+    background: #40ad79;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.drag-drop-wrapper span.-icon i {
+    color: #727272;
+    font-size: 140px;
+    display: none;
+}
+
+span.-text {
+    font-size: 16px;
+    letter-spacing: 1.2px;
+}
+
+.preview-area {
+    margin-bottom: 20px;
+}
+
+.instructions {
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.instructions .key-points {
+    color: var(--tree-item-color-english);
+}
+
+.zip {
+    display: inline-flex;
+    border: 1px solid;
+    margin-bottom: 20px;
+    margin-right: 5px;
+    width: auto;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.zip img {
+    display: block;
+    height: 50px;
+    width: 50px;
+}
+
+.action-col {
+    text-align: right;
+    line-height: 0;
+    padding: 4px;
+}
+
+.action-col p {
+    line-height: 1.5;
+    line-break: anywhere;
+}
+
+.action-col i {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}

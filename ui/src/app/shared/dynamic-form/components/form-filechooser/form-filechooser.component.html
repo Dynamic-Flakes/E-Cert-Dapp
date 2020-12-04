@@ -1,0 +1,51 @@
+<div class="dynamic-field form-input" [formGroup]="group">
+    <!-- <label *ngIf="config.label">{{ config.label }}</label> -->
+
+    <!-- - -->
+    <div class="drag-drop-container">
+        <div class="drag-drop-wrapper" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event, config.valueType)">
+            <!-- - -->
+            <span class="-icon"><i class="la la-cloud-upload-alt"></i></span>
+            <!-- - -->
+            <span class="-btn">
+        <!-- - -->
+        <span class="-upload-btn">
+          CHOOSE FILE
+        </span>
+            <!-- - -->
+            <input hidden type="file" #fileInput (change)="uploadFile($event.target.files, config.valueType)" />
+            </span>
+            <!-- - -->
+            <span class="-text"><span class="jx-t-uppercased">{{ config.label }} </span>&nbsp; {{config?.size}}</span>
+            <!--  -->
+        </div>
+    </div>
+
+    <div class="preview-area" *ngIf="config.valueType == 'zip' && files.length">
+        <span class="zip" *ngFor="let file of files; let i = index">
+          <img src="assets/images/rar-icon-100x100.png" alt="">
+          <span class="action-col">
+            <i class="la la-close" (click)="deleteAttachment(file)"></i>
+            <p>{{file?.name}}</p>
+          </span>
+        </span>
+    </div>
+
+    <div class="preview-area" *ngIf="config.valueType == 'doc' && files.length">
+        <span class="zip" *ngFor="let file of files; let i = index">
+          <div style="display: flex; align-items: center;">
+            <i class="las la-file-alt" style="font-size: 30px;"></i>
+          </div>
+          <span class="action-col">
+            <i class="la la-close" (click)="deleteAttachment(file)"></i>
+            <p>{{file?.name}}</p>
+          </span>
+        </span>
+    </div>
+
+    <div class="preview-area" *ngIf="config.valueType == 'image' && files.length">
+        <span *ngFor="let file of files; let i = index">
+          <app-image-file-preview [file]="file" [index]="i" (delete)="deleteAttachment($event)"></app-image-file-preview>
+        </span>
+    </div>
+</div>

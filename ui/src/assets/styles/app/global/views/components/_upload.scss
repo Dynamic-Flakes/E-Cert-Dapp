@@ -1,0 +1,10 @@
+.tab-content-wrapper {
+    display: block;
+    padding: 40px 60px;
+    &.upload {
+        background: rgb(221 108 157 / 0.3);
+    }
+    &.search {
+        background: rgb(52 152 219 / 0.3);
+    }
+}
