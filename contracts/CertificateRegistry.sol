@@ -2,7 +2,7 @@
 
 pragma solidity >=0.4.22 <0.8.0;
 
-import "./Ownable.sol";
+import "./zeppelin/ownership/Ownable.sol";
 
 contract CertificateRegistry is Ownable {
     /**
@@ -24,10 +24,10 @@ contract CertificateRegistry is Ownable {
       A mapping of the document hash to the documentinfo that was issued
       This mapping is used to keep track of every certification document initiated for every student by an educator.
      */
-    mapping(string => DocumentInfo) private documentRegistry;
+    mapping(string => DocumentInfo) public documentRegistry;
 
     // event for EVM logging
-    event NewHashStored(
+    event LogNewHashStored(
         address indexed issuer,
         string documentHash,
         uint256 timeOfIssue,
@@ -61,22 +61,27 @@ contract CertificateRegistry is Ownable {
         onlyHashValueNotEmpty(_documentHash)
         onlyNotHashed(_documentHash)
     {
+        require(
+            msg.sender != address(0x0),
+            "Error: ensure educator address exist"
+        );
         DocumentInfo memory docInfo = DocumentInfo({
             documentHash: _documentHash,
             issuer: msg.sender,
-            timeOfIssue: block.number,
+            timeOfIssue: block.timestamp,
             isStored: true
         });
 
         documentRegistry[_documentHash] = docInfo;
 
         // creates the event, to be used to query all the store hash of the certificates
-        emit NewHashStored(msg.sender, _documentHash, block.number, true);
+        emit LogNewHashStored(msg.sender, _documentHash, block.number, true);
     }
 
     function verifyCertificate(string memory _documenteHash)
         public
         view
+        onlyHashValueNotEmpty(_documenteHash)
         returns (bool)
     {
         bool test = stringsEqual(
@@ -87,24 +92,6 @@ contract CertificateRegistry is Ownable {
             return true;
         }
         return false;
-    }
-
-    function getCertificateInfo(string memory _hash)
-        public
-        view
-        returns (
-            string memory,
-            address,
-            uint256,
-            bool
-        )
-    {
-        return (
-            documentRegistry[_hash].documentHash,
-            documentRegistry[_hash].issuer,
-            documentRegistry[_hash].timeOfIssue,
-            documentRegistry[_hash].isStored
-        );
     }
 
     function isHashStored(string memory _documentHash)
