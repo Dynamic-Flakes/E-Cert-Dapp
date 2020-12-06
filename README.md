@@ -52,15 +52,15 @@ in the verifying window
 
 ## Technology stack:
 
- - Truffle - ( development framework for dapps based on the Ethereum blockchain: https://truffleframework.com/),
- - Ganache - ( A personal blockchain for Ethereum development that can be used to deploy contracts, develop applications, and run tests: https://truffleframework.com/ganache),
- - Solidity - (contract-oriented programming language for writing smart contracts: https://solidity.readthedocs.io/en/v0.4.24/),
- - Web3.js - (Ethereum JavaScript API: https://github.com/ethereum/web3.js/)
+ - <b>Truffle</b> - ( development framework for dapps based on the Ethereum blockchain: https://truffleframework.com/),
+ - <b>Ganache</b> - ( A personal blockchain for Ethereum development that can be used to deploy contracts, develop applications, and run tests: https://truffleframework.com/ganache),
+ - <b>Solidity</b> - (contract-oriented programming language for writing smart contracts: https://solidity.readthedocs.io/en/v0.4.24/),
+ - <b>Web3.js</b> - (Ethereum JavaScript API: https://github.com/ethereum/web3.js/)
+- <b>Truffle Contract</b> -(Better Ethereum contract abstraction, for Node and the browser):https://www.npmjs.com/package/@truffle/contract
+ - <b>MetaMask</b> - (A browser plugin which allows users to make transactions to Ethereum or other networks through browsers, eliminating the need for dedicated user interfaces for Ethereum or other networks: https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en)
 
- - MetaMask - (A browser plugin which allows users to make transactions to Ethereum or other networks through browsers, eliminating the need for dedicated user interfaces for Ethereum or other networks: https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en)
-
- - NodeJS - (An open source and cross-platform runtime environment for executing JavaScript code outside of a browser: https://nodejs.org/en/),
- - Angular - (TypeScript-based open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations: https://angular.io/).
+ - <b>NodeJS</b> - (An open source and cross-platform runtime environment for executing JavaScript code outside of a browser: https://nodejs.org/en/),
+ - <b>Angular</b> - (TypeScript-based open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations: https://angular.io/).
 
  ## Set Up
  ### Install truffle
