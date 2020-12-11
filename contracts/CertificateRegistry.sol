@@ -39,6 +39,11 @@ contract CertificateRegistry is Ownable {
         _;
     }
 
+    modifier transactionDoesNotExist(bytes32 scriptHash) {
+        require(transactions[scriptHash].value == 0, "Transaction exists");
+        _;
+    }
+
     modifier onlyHashValueNotEmpty(bytes32 _documentHash) {
         require(
             _documentHash.length > 0,

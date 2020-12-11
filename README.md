@@ -83,14 +83,14 @@ in the verifying window
  - Verify installation by running the command on your CLI ` node -v`
  - You can use npm or yarn for package management
 
-#Testing Results
+### Testing Results
 - Open a terminal and run:
  `truffle test or yarn run test`
 
 
 ![Alt text](./diagrams/test-results.png?raw=true "Test results")
 
-#Test Coverage Results
+### Test Coverage Results
 - Open a terminal and run:
  `truffle run coverage or yarn run coverage`
 
