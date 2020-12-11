@@ -5,11 +5,10 @@ require('chai')
 
 contract('CertificateRegistry', accounts => {
   const [deployer, student, verifier] = accounts;
-
     // Contract instance
   let certificateRegistryInstance
 
-  const hash1 = '0x3a267813bea8120f55a7b9ca814c34dd89f237502544d7c75dfd709a659f6330'
+  const hash1 = '0x94f3e4c13989c51472ce78354b5205c5411f82e83c745b6f675e0c9aeb8ab4d1'
   let _timeOfIssue = Math.floor((new Date).getTime() / 1000);
 
 // Create a new instance of the contract before each test
@@ -46,8 +45,6 @@ describe('deployment', async () => {
       assert.equal(event.issuer, deployer, 'issuer is correct')
       assert.equal(event.timeOfIssue, _timeOfIssue, 'time is correct')
       assert.equal(event.isStored, true, 'hash is not stored')
-
-
     })
 
     it('should not store empty input', async () => {
@@ -57,7 +54,6 @@ describe('deployment', async () => {
 
     it('should not add hash when hash already exists', async () => {
     await certificateRegistryInstance.storeHash(hash1, { from: deployer }).should.be.rejected;
-
     });
 
    it('should not store hash when user is not owner', async () => {
@@ -69,11 +65,10 @@ describe('deployment', async () => {
     let validHash
 
     before(async () => {
-      validHash = await certificateRegistryInstance.verifyCertificate(hash1)
+      validHash = await certificateRegistryInstance.verifyHash(hash1)
     })
     it('should return true for valid document hash', async () => {
     assert.strictEqual(validHash, true, 'Document hash is valid')
     });
   })
-
 })
