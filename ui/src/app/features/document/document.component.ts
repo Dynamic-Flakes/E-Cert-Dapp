@@ -21,7 +21,7 @@ export class DocumentComponent implements OnInit {
 
   updateTitle(path) {
     if (path == 'upload') this.title = 'Upload';
-    else if (path == 'search') this.title = 'Search';
+    else if (path == 'verify') this.title = 'Verify';
     else return null;
   }
 }

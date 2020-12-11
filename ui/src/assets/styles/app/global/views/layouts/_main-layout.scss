@@ -1,8 +1,8 @@
 .main-layout {
-    display: flex;
+    display: block;
     background-color: transparent;
     background-repeat: no-repeat;
-    background-image: url(http://mnkythemes.com/fintechwp/davos/wp-content/uploads/sites/2/2016/07/world-map-dots.png);
+    background-image: linear-gradient(rgb(255, 255, 255, .76), rgba(255, 255, 255, 0.15)), url(/assets/images/world-map-dots.png);
     background-size: contain;
     background-position: right center;
     width: 100%;
@@ -10,4 +10,12 @@
     opacity: 1;
     font-family: monospace;
     overflow-x: hidden;
+}
+
+@media (max-width: 960px) {
+    .main-layout {
+        background-image: linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.15)), url(/assets/images/world-map-dots.png);
+        background-size: cover;
+        background-position: center;
+    }
 }

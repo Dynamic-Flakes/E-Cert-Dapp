@@ -9,6 +9,7 @@ import { DocumentComponent } from './features/document/document.component';
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
 import { UploadComponent } from './features/document/components/upload/upload.component';
 import { SearchComponent } from './features/document/components/search/search.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SearchComponent } from './features/document/components/search/search.co
     DocumentComponent,
     MainLayoutComponent,
     UploadComponent,
-    SearchComponent
+    SearchComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
