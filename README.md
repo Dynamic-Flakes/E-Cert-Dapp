@@ -89,3 +89,9 @@ in the verifying window
 
 
 ![Alt text](./diagrams/test-results.png?raw=true "Test results")
+
+#Test Coverage Results
+- Open a terminal and run:
+ `truffle run coverage or yarn run coverage`
+
+![Alt text](./diagrams/test-coverage.png?raw=true "Test coverage results")

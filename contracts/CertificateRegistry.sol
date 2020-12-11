@@ -78,8 +78,6 @@ contract CertificateRegistry is Ownable {
         bool valid = isHashStored(_documenteHash);
         if (valid) {
             return true;
-        } else {
-            return false;
         }
     }
 
