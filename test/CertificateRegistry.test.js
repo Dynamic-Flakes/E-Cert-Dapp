@@ -3,9 +3,9 @@ require('chai')
   .use(require('chai-as-promised'))
   .should()
 
-// const [deployer, student, verifier] = accounts;
+contract('CertificateRegistry', accounts => {
+  const [deployer, student, verifier] = accounts;
 
-contract('CertificateRegistry', ([deployer, student, verifier]) => {
     // Contract instance
   let certificateRegistryInstance
 

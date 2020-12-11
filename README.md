@@ -82,3 +82,10 @@ in the verifying window
  - After downloading it, click the installer to get it installed on your machine
  - Verify installation by running the command on your CLI ` node -v`
  - You can use npm or yarn for package management
+
+#Testing Results
+- Open a terminal and run:
+ `truffle test or yarn run test`
+
+
+![Alt text](./diagrams/test-results.png?raw=true "Test results")
