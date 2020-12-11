@@ -10,7 +10,7 @@ const routes: Routes = [
     path: 'cert', component: DocumentComponent, children: [
       { path: "", redirectTo: "upload", pathMatch: "full" },
       { path: 'upload', component: UploadComponent },
-      { path: 'search', component: SearchComponent },
+      { path: 'verify', component: SearchComponent },
     ]
   }
 ];

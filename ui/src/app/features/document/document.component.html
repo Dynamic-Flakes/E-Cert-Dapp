@@ -6,8 +6,8 @@
                     <li class="-tab-trigger" routerLink="/cert/upload" [class.active]="viewMode == 'upload'" rel="upload" (click)="updateTitle('upload')">
                         Upload
                     </li>
-                    <li class="-tab-trigger" routerLink="/cert/search" [class.active]="viewMode == 'search'" rel="search" (click)="updateTitle('search')">
-                        Search
+                    <li class="-tab-trigger" routerLink="/cert/verify" [class.active]="viewMode == 'verify'" rel="verify" (click)="updateTitle('verify')">
+                        Verify
                     </li>
                 </ul>
                 <span class="title">{{title}}</span>
@@ -16,4 +16,5 @@
             <router-outlet></router-outlet>
         </div>
     </div>
+    <app-footer></app-footer>
 </app-main-layout>

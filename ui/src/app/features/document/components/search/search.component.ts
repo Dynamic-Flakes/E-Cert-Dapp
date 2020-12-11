@@ -20,11 +20,11 @@ export class SearchComponent implements OnInit {
       label: 'Search',
       name: 'searchTerm',
       valueType: 'text',
-      placeholder: 'Find a Certificate',
+      placeholder: 'Enter certificate name',
       validation: [Validators.required]
     },
     {
-      label: 'Retrieve Certificate',
+      label: 'Verify',
       name: 'submit',
       type: 'button'
     }
