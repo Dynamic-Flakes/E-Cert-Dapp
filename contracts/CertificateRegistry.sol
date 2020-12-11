@@ -27,7 +27,7 @@ contract CertificateRegistry is Ownable {
     // event for EVM logging
     event LogNewHashStored(
         address indexed issuer,
-        uint timeOfIssue,
+        uint256 timeOfIssue,
         bool isStored
     );
 
@@ -74,23 +74,16 @@ contract CertificateRegistry is Ownable {
         emit LogNewHashStored(msg.sender, block.timestamp, true);
     }
 
-    function verifyHash(bytes32 _documenteHash)
-        public
-        pure
-        returns (bool)
-    {
-        bool valid = _documenteHash.length > 0;
+    function verifyHash(bytes32 _documenteHash) public view returns (bool) {
+        bool valid = isHashStored(_documenteHash);
         if (valid) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
-    function isHashStored(bytes32 _documentHash)
-        internal
-        view
-        returns (bool)
-    {
+    function isHashStored(bytes32 _documentHash) internal view returns (bool) {
         return documentRegistry[_documentHash].isStored == true;
     }
 }
