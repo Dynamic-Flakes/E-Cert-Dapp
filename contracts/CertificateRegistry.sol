@@ -74,8 +74,7 @@ contract CertificateRegistry is Ownable {
         emit LogNewHashStored(msg.sender, block.timestamp, true);
     }
 
-
-    function verifyCertificate(bytes32 _documenteHash)
+    function verifyHash(bytes32 _documenteHash)
         public
         pure
         returns (bool)
@@ -94,5 +93,4 @@ contract CertificateRegistry is Ownable {
     {
         return documentRegistry[_documentHash].isStored == true;
     }
-
 }

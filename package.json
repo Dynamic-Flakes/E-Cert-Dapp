@@ -11,10 +11,11 @@
     "test": "test"
   },
   "scripts": {
+    "benchmark": "truffle test ./benchmark/*",
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
     "console": "truffle console --network development",
-    "coverage": "./node_modules/.bin/solidity-coverage",
+    "coverage": "truffle run coverage",
     "test": "truffle test",
     "solgraph": "solgraph contracts/CertificateRegistry.sol  > doc/CertificateRegistry.dot && dot -Tpng doc/CertificateRegistry.dot -o doc/CertificateRegistry.png",
     "start:ganache": "cd Downloads && ./ganache-2.5.4-linux-x86_64.AppImage"
