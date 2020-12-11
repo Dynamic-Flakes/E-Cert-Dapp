@@ -7,6 +7,7 @@ module.exports = {
       network_id: "*" // Match any network id
     },
   },
+    plugins: ["solidity-coverage"],
   contracts_directory: './contracts/',
   contracts_build_directory: './abis/',
   compilers: {

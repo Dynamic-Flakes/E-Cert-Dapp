@@ -39,30 +39,30 @@ contract Ownable {
         _;
     }
 
-    modifier onlyStudent() {
-        require(isStudent(), "Only student can call this.");
-        _;
-    }
+    // modifier onlyStudent() {
+    //     require(isStudent(), "Only student can call this.");
+    //     _;
+    // }
 
     function isOwner() public view returns (bool) {
         return msg.sender == contractOwner;
     }
 
-    function isStudent() public view returns (bool) {
-        return msg.sender == student;
-    }
+    // function isStudent() public view returns (bool) {
+    //     return msg.sender == student;
+    // }
 
-    function isVerifier() public view returns (bool) {
-        return msg.sender == verifier;
-    }
+    // function isVerifier() public view returns (bool) {
+    //     return msg.sender == verifier;
+    // }
 
     /*
      * @dev Allows the current owner to transfer control of the contract to a newOwner.
      * @param newOwner The address to transfer ownership to.
      */
-    function transferOwnership(address newOwner) public onlyOwner {
-        require(newOwner != address(0));
-        emit OwnershipTransferred(contractOwner, newOwner);
-        contractOwner = newOwner;
-    }
+    // function transferOwnership(address newOwner) public onlyOwner {
+    //     require(newOwner != address(0));
+    //     emit OwnershipTransferred(contractOwner, newOwner);
+    //     contractOwner = newOwner;
+    // }
 }

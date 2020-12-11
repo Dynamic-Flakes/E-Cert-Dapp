@@ -1,0 +1,9 @@
+strict digraph {
+  storeHash
+  LogNewHashStored
+  verifyCertificate [color=yellow]
+  isHashStored [color=gray]
+  stringsEqual [color=gray]
+  storeHash -> LogNewHashStored
+}
+

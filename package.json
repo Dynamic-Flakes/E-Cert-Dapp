@@ -6,23 +6,27 @@
   "repository": "https://github.com/Dynamic-Flakes/E-Cert-Dapp.git",
   "author": "melitus <asmelitus@gmail.com>",
   "license": "MIT",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
   "scripts": {
+    "benchmark": "truffle test ./benchmark/*",
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
     "console": "truffle console --network development",
-    "coverage": "./node_modules/.bin/solidity-coverage",
+    "coverage": "truffle run coverage",
     "test": "truffle test",
-    "solgraph": "solgraph contracts/CertificateRegistry.sol  > doc/Conference.CertificateRegistry && dot -Tpng doc/CertificateRegistry.dot -o doc/CertificateRegistry.png",
+    "solgraph": "solgraph contracts/CertificateRegistry.sol  > doc/CertificateRegistry.dot && dot -Tpng doc/CertificateRegistry.dot -o doc/CertificateRegistry.png",
     "start:ganache": "cd Downloads && ./ganache-2.5.4-linux-x86_64.AppImage"
-
-
   },
   "dependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1"
   },
   "devDependencies": {
-    "solgraph": "^0.3.2",
-    "solidity-coverage": "^0.5.5"
+    "solgraph": "^0.3.3",
+    "solidity-coverage": "^0.7.13",
+    "solium": "^1.2.5"
   }
 }
