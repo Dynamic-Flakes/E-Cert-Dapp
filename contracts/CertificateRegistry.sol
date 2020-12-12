@@ -84,6 +84,6 @@ contract CertificateRegistry is Ownable {
     }
 
     function isHashStored(bytes32 _documentHash) internal view returns (bool) {
-        return documentRegistry[_documentHash].isStored == true;
+        return documentRegistry[_documentHash].isStored;
     }
 }
