@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { JxToasterService } from 'jx-toaster';
+import * as CryptoJS from 'crypto-js';
 const Web3 = require('web3');
 
 declare let require: any;
@@ -13,15 +15,18 @@ export class DocumentService {
   private readonly web3: any;
   private enable: any;
 
-  constructor() {
+  constructor(public $jx: JxToasterService) {
+
     if (window.ethereum === undefined) {
-      alert('Non-Ethereum browser detected. Install MetaMask');
-    } else {
-      if (typeof window.web3 !== 'undefined') {
+      this.$jx.pop("danger", `Non-Ethereum browser detected. Install MetaMask!`, ``, true);
+    }
+
+    else {
+      if (typeof window.web3 !== 'undefined')
         this.web3 = window.web3.currentProvider;
-      } else {
+      else
         this.web3 = new Web3.providers.HttpProvider('http://localhost:8545');
-      }
+
       window.web3 = new Web3(window.ethereum);
       this.enable = this.enableMetaMaskAccount();
     }
@@ -32,8 +37,6 @@ export class DocumentService {
     await new Promise((resolve, reject) => {
       enable = window.ethereum.enable();
     });
-
-    const account = await this.getAccount();
     return Promise.resolve(enable);
   }
 
@@ -42,17 +45,15 @@ export class DocumentService {
       this.account = await new Promise((resolve, reject) => {
         window.web3.eth.getAccounts((err, retAccount) => {
 
-          console.log(retAccount)
-
           if (retAccount.length > 0) {
             this.account = retAccount[0];
             resolve(this.account);
           } else {
-            alert('document.service :: getAccount :: no accounts found.');
+            this.$jx.pop("danger", `No accounts found!`, ``, true);
             reject('No accounts found.');
           }
           if (err != null) {
-            alert('document.service :: getAccount :: error retrieving account');
+            this.$jx.pop("danger", `Error retrieving account!`, ``, true);
             reject('Error retrieving account');
           }
         });
@@ -61,37 +62,114 @@ export class DocumentService {
     return Promise.resolve(this.account);
   }
 
-  hashCertificate(data) {
+  public async getUserBalance(): Promise<any> {
+    const account = await this.getAccount();
 
+    return new Promise((resolve, reject) => {
+      window.web3.eth.getBalance(account, function (err, balance) {
+
+        if (!err) {
+          const retVal = {
+            account: account,
+            balance: balance
+          };
+
+          resolve(retVal);
+        } else {
+          reject({ account: 'error', balance: 0 });
+        }
+      });
+    }) as Promise<any>;
   }
 
   saveHash(value) {
     const that = this;
-    console.log(this)
-    console.log('document.service :: transferEther to: ' +
-      value.hash + ', from: ' + that.account);
 
     return new Promise((resolve, reject) => {
-      console.log(tokenAbi);
 
       const contract = require('@truffle/contract');
       const transferContract = contract(tokenAbi);
       transferContract.setProvider(that.web3);
 
-      console.log(transferContract);
+      transferContract.deployed().then(function (instance) {
+        return instance.storeHash(
+          value.hash,
+          {
+            from: that.account,
+          });
+      }).then(function (data) {
+        return resolve(data);
+      }).catch(function (error) {
+        return reject(error);
+      });
+    });
+  }
+
+  verifyHash(value) {
+    const that = this;
+
+    return new Promise((resolve, reject) => {
+      const contract = require('@truffle/contract');
+      const transferContract = contract(tokenAbi);
+      transferContract.setProvider(that.web3);
 
       transferContract.deployed().then(function (instance) {
-        return instance.storeHash(value.hash);
+        return instance.verifyHash(value.hash);
       }).then(function (status) {
-        if (status) {
-          return resolve({ status: true });
-        }
+        return resolve(status);
       }).catch(function (error) {
-        console.log(error);
-        return reject('document.service error');
+        return reject(error);
       });
     });
   }
 
 
+  async hashing(_file): Promise<any> {
+    let hash;
+    if (_file) {
+      hash = await new Promise((resolve, reject) => {
+        let hashdata = CryptoJS.algo.SHA256.create();
+        let file = _file;
+        if (file) {
+          let reader = new FileReader();
+          let size = file.size;
+          let chunk_size = Math.pow(2, 22);
+          let chunks = [];
+
+          let offset = 0;
+          let bytes = 0;
+          reader.onloadend = (e) => {
+            if (reader.readyState == FileReader.DONE) {
+
+              //every chunk read updating hash
+              hashdata.update(this.arrayBufferToWordArray(reader.result));
+
+              let chunk: any = reader.result;
+              bytes += chunk.length;
+              chunks.push(chunk);
+
+              if ((offset < size)) {
+                offset += chunk_size;
+                let blob = file.slice(offset, offset + chunk_size);
+                reader.readAsArrayBuffer(blob);
+              } else {
+                //use below hash for result
+                //finaly generating hash
+                let resultingHash = hashdata.finalize().toString();
+                resolve(resultingHash);
+              };
+            }
+          };
+          let blob = file.slice(offset, offset + chunk_size);
+          reader.readAsArrayBuffer(blob);
+        }
+      }) as Promise<any>;
+    }
+    return Promise.resolve(hash);
+  }
+
+  arrayBufferToWordArray(fileResult) {
+    let i8a = new Uint8Array(fileResult);
+    return CryptoJS.lib.WordArray.create(i8a, i8a.length);
+  }
 }
