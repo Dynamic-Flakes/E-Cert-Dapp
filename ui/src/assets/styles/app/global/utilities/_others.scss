@@ -1,0 +1,35 @@
+._dot {
+    width: 5px;
+    height: 5px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+._inline-dot {
+    display: inline-block;
+}
+
+._round-button {
+    border-radius: 50%!important;
+}
+
+.progress--height-2 {
+    height: 5px;
+}
+
+.rounded-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 45px;
+    text-align: center;
+}
+
+.jx-unstyle {
+    @include list-unstyled
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

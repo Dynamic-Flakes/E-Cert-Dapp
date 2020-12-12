@@ -1,0 +1,4 @@
+<form class="dynamic-form" [ngClass]="float ? 'jextaly-float': ''" [formGroup]="form" (submit)="handleSubmit($event)">
+  <ng-container *ngFor="let field of config;" dynamicField [config]="field" [group]="form">
+  </ng-container>
+</form>

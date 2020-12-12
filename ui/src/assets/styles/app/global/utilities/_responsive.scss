@@ -1,0 +1,25 @@
+.jx-container {
+    position: relative;
+    width: 80%;
+    height: inherit;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+    
+}
+
+@media (max-width: 992px) {
+
+}
+
+@media screen and (max-width: 768px) {
+    .jx-container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 576px) { 
+
+}

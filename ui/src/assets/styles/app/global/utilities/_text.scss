@@ -1,0 +1,182 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.card-title,
+.text-title {
+    color: $heading;
+}
+
+// Text Alignment
+.jx-t-justify {
+    text-align: justify !important;
+}
+
+.jx-t-wrap {
+    white-space: normal !important;
+}
+
+.jx-t-nowrap {
+    white-space: nowrap !important;
+}
+
+.jx-t-truncate {
+    @include text-truncate();
+}
+
+// Responsive alignment
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+        .jx-t#{$infix}-left {
+            text-align: left !important;
+        }
+        .jx-t#{$infix}-right {
+            text-align: right !important;
+        }
+        .jx-t#{$infix}-center {
+            text-align: center !important;
+        }
+    }
+}
+
+// Text Transformation
+.jx-t-lowercase {
+    text-transform: lowercase !important;
+}
+
+.jx-t-uppercase {
+    text-transform: uppercase !important;
+}
+
+.jx-t-capitalize {
+    text-transform: capitalize !important;
+}
+
+// Font Size
+@for $i from 10 through 78 {
+    .jx-fs-#{$i} {
+        font-size: #{$i}px;
+    }
+}
+
+.jx-t-small {
+    font-size: .75rem;
+}
+
+// Font Weight and italics
+.jx-fw-light {
+    font-weight: $font-weight-light !important;
+}
+
+.jx-fw-lighter {
+    font-weight: $font-weight-lighter !important;
+}
+
+.jx-fw-normal {
+    font-weight: $font-weight-normal !important;
+}
+
+.jx-fw-bold {
+    font-weight: $font-weight-bold !important;
+}
+
+.jx-fw-bolder {
+    font-weight: $font-weight-bolder !important;
+}
+
+.font-italic {
+    font-style: italic !important;
+}
+
+// Contextual colors
+.jx-t-white {
+    color: $white !important;
+}
+
+.jx-t-muted {
+    color: $text-muted !important;
+}
+
+.jx-t-black-50 {
+    color: rgba($black, .5) !important;
+}
+
+.jx-t-white-50 {
+    color: rgba($white, .5) !important;
+}
+
+// Misc
+.jx-t-hide {
+    @include text-hide();
+}
+
+.jx-t-deco-none {
+    text-decoration: none !important;
+}
+
+.jx-t-deco-through {
+    text-decoration: line-through !important;
+}
+
+.jx-t-break {
+    word-break: break-word !important; // IE & < Edge 18
+    overflow-wrap: break-word !important;
+}
+
+// Reset
+.jx-t-reset {
+    color: inherit !important;
+}
+
+.blockquote {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.blockquote-footer {
+    display: block;
+    font-size: 80%;
+    color: $gray-500;
+}
+
+// second typography
+.section-info {
+    font-size: 14px;
+    color: $gray-500;
+}
+
+.heading {
+    color: darken(desaturate($primary-base, 40), 5);
+    font-weight: 700;
+}
+
+.display-content {
+    margin: 20px 0;
+}
+
+.display-1 {
+    font-size: 6rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.display-2 {
+    font-size: 5.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.display-3 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.display-4 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}

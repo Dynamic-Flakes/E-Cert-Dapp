@@ -1,0 +1,111 @@
+  @for $i from 0 through 10 {
+    [jx-m-#{$i}],
+    .jx-m-#{$i} {
+      margin: #{$i}rem;
+    }
+  }
+  
+  @for $i from 0 through 10 {
+    [jx-mt-#{$i}],
+    .jx-mt-#{$i} {
+      margin-top: #{$i}rem;
+    }
+  }
+  @for $i from 0 through 10 {
+    [jx-mr-#{$i}],
+    .jx-mr-#{$i} {
+      margin-right: #{$i}rem;
+    }
+  }
+  @for $i from 0 through 10 {
+    [jx-mb-#{$i}],
+    .jx-mb-#{$i} {
+      margin-bottom: #{$i}rem;
+    }
+  }
+  @for $i from 0 through 10 {
+    [jx-ml-#{$i}],
+    .jx-ml-#{$i} {
+      margin-left: #{$i}rem;
+    }
+  }
+  @for $i from 0 through 10 {
+    [jx-my-#{$i}],
+    .jx-my-#{$i} {
+      margin-top: #{$i}rem;
+      margin-bottom: #{$i}rem;
+    }
+  }
+  @for $i from 0 through 10 {
+    [jx-mx-#{$i}],
+    .jx-mx-#{$i} {
+      margin-left: #{$i}rem;
+      margin-right: #{$i}rem;
+    }
+  }
+
+  .jx-m-auto {
+    margin: auto !important;
+  }
+  .jx-mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .jx-my-auto {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }  
+  
+  .jx-m-05,
+  [jx-m-05] {
+    margin: 0.5rem !important;
+  }
+  .jx-mt-05,
+  [jx-mt-05] {
+    margin-top: .5rem !important;
+  }
+  .jx-mr-05,
+  [jx-mr-05] {
+    margin-right: .5rem !important;
+  }
+  .jx-ml-05,
+  [jx-ml-05] {
+    margin-left: .5rem !important;
+  }
+  .jx-mb-05,
+  [jx-mb-05] {
+    margin-bottom: .5rem !important;
+  }
+  .jx-my-05,
+  [jx-my-05] {
+    margin-top: .5rem !important;
+    margin-bottom: .5rem !important;
+  }
+  .jx-mx-05,
+  [jx-mx-05] {
+    margin-left: .5rem !important;
+    margin-right: .5rem !important;
+  }
+  .jx-m-033,
+  [jx-m-033] {
+    margin: .333333rem !important;
+  }
+
+  .jx-my-033,
+  [jx-my-033] {
+    margin-top: .333333rem !important;
+    margin-bottom: .333333rem !important;
+  }
+
+  .jx-mx-033,
+  [jx-mx-033] {
+    margin-left: .333333rem !important;
+    margin-right: .333333rem !important;
+  }
+
+  @for $i from 0 through 10 {
+    [jx-n_mt-#{$i}],
+    .jx-n_mt-#{$i}px {
+      margin-top: -#{$i}px;
+    }
+  }
