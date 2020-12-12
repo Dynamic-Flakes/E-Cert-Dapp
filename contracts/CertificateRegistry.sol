@@ -74,14 +74,14 @@ contract CertificateRegistry is Ownable {
         emit LogNewHashStored(msg.sender, block.timestamp, true);
     }
 
-
     function verifyHash(bytes32 _documenteHash) public view returns (bool) {
+        bool verified = false;
         if (documentRegistry[_documenteHash].isStored) {
-            return true;
+            verified = true;
+            return verified;
         }
-        return false;
+        return verified;
     }
-
 
     function isHashStored(bytes32 _documentHash) internal view returns (bool) {
         return documentRegistry[_documentHash].isStored == true;
