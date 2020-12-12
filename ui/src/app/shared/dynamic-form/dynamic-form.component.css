@@ -1,0 +1,6 @@
+form.jextaly-float {
+    background: var(--jf-background-two);
+    padding: var(--jf-padding);
+    border: var(--jf-border);
+    box-shadow: var(--jf-boxshadow);
+}

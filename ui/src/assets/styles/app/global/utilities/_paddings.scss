@@ -1,0 +1,78 @@
+  @for $i from 0 through 10 {
+      [jx-p-#{$i}],
+      .jx-p-#{$i} {
+          padding: #{$i}rem;
+      }
+  }
+  
+  @for $i from 0 through 10 {
+      [jx-pt-#{$i}],
+      .jx-pt-#{$i} {
+          padding-top: #{$i}rem;
+      }
+  }
+  
+  @for $i from 0 through 10 {
+      [jx-pr-#{$i}],
+      .jx-pr-#{$i} {
+          padding-right: #{$i}rem;
+      }
+  }
+  
+  @for $i from 0 through 10 {
+      [jx-pb-#{$i}],
+      .jx-pb-#{$i} {
+          padding-bottom: #{$i}rem;
+      }
+  }
+  
+  @for $i from 0 through 10 {
+      [jx-pl-#{$i}],
+      .jx-pl-#{$i} {
+          padding-left: #{$i}rem;
+      }
+  }
+
+  @for $i from 0 through 10 {
+    [jx-py-#{$i}],
+    .jx-py-#{$i} {
+      padding-top: #{$i}rem;
+      padding-bottom: #{$i}rem;
+    }
+  }
+  @for $i from 0 through 10 {
+    [jx-px-#{$i}],
+    .jx-px-#{$i} {
+        padding-left: #{$i}rem;
+        padding-right: #{$i}rem;
+    }
+  }
+  
+  .jx-p-05,
+  [jx-p-05] {
+      padding: .5rem !important;
+  }
+  
+  .jx-pt-05,
+  [jx-pt-05] {
+      padding-top: .5rem !important;
+  }
+  
+  .jx-pr-05,
+  [jx-pr-05] {
+      padding-right: .5rem !important;
+  }
+  
+  .jx-pb-05,
+  [jx-pb-05] {
+      padding-bottom: .5rem !important;
+  }
+  
+  .jx-pl-05,
+  [jx-pl-05] {
+      padding-left: .5rem !important;
+  }
+  
+  .p-t-b-80 {
+      padding: 80px 0px;
+  }

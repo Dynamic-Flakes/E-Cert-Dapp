@@ -1,0 +1,21 @@
+.main-layout {
+    display: block;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgb(255, 255, 255, .76), rgba(255, 255, 255, 0.15)), url(/assets/images/world-map-dots.png);
+    background-size: contain;
+    background-position: right center;
+    width: 100%;
+    height: 100vh;
+    opacity: 1;
+    font-family: monospace;
+    overflow-x: hidden;
+}
+
+@media (max-width: 960px) {
+    .main-layout {
+        background-image: linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.15)), url(/assets/images/world-map-dots.png);
+        background-size: cover;
+        background-position: center;
+    }
+}
