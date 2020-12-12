@@ -70,17 +70,16 @@ contract CertificateRegistry is Ownable {
 
         documentRegistry[_documentHash] = docInfo;
 
-        // creates the event, to be used to query all the store hash of the certificates
         emit LogNewHashStored(msg.sender, block.timestamp, true);
     }
 
     function verifyHash(bytes32 _documenteHash) public view returns (bool) {
-        bool verified = false;
+        bool isVerified = false;
         if (documentRegistry[_documenteHash].isStored) {
-            verified = true;
-            return verified;
+            isVerified = true;
+            return isVerified;
         }
-        return verified;
+        return isVerified;
     }
 
     function isHashStored(bytes32 _documentHash) internal view returns (bool) {
