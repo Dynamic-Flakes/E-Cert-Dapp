@@ -1,4 +1,26 @@
 <div class="tab-content-wrapper upload">
+    <div class="acc-info">
+        <!-- <div class="details">
+            <span class="key">Balance:</span>
+            <span class="value">{{user?.balance}}</span>
+        </div>
+        <div class="details">
+            <span class="key">Account:</span>
+            <span class="value">{{user?.address}}</span>
+        </div> -->
+        <div class="details">
+            <span class="key">File Hash:</span>
+            <span class="value">{{transactionInfo?.fileHash}}</span>
+        </div>
+        <div class="details">
+            <span class="key">TX ID:</span>
+            <span class="value">{{transactionInfo?.tx}}</span>
+        </div>
+        <div class="details">
+            <span class="key">Block No:</span>
+            <span class="value">{{transactionInfo?.blockNumber}}</span>
+        </div>
+    </div>
     <!-- Busy -->
     <!-- <span class="form-overlay" *ngIf="busy"><i class="la la-refresh icon-spin "></i></span> -->
     <dynamic-form [float]="float_style" [config]="config" #form="dynamicForm" (submit)="submit($event)"></dynamic-form>

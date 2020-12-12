@@ -1,0 +1,8 @@
+.details {
+    display: flex;
+    gap: 20px;
+    overflow-wrap: anywhere;
+    span.key {
+        white-space: nowrap;
+    }
+}

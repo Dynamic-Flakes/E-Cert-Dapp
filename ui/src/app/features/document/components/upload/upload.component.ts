@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import * as CryptoJS from 'crypto-js';
 import { Validators } from '@angular/forms';
+import { JxToasterService } from 'jx-toaster';
 import { DocumentService } from 'src/app/services/document.service';
 import { DynamicFormComponent } from 'src/app/shared/dynamic-form/dynamic-form.component';
 import { FieldConfig } from 'src/app/shared/dynamic-form/models/field-config';
@@ -11,6 +13,16 @@ import { FieldConfig } from 'src/app/shared/dynamic-form/models/field-config';
 })
 export class UploadComponent implements OnInit {
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
+  user = {
+    address: 0x0,
+    balance: 0
+  }
+
+  transactionInfo = {
+    blockNumber: '',
+    tx: '',
+    fileHash: ''
+  }
 
   busy = false;
   float_style = true;
@@ -30,8 +42,15 @@ export class UploadComponent implements OnInit {
       type: 'button'
     }
   ];
+  // myFunc;
 
-  constructor(private $doc: DocumentService) { }
+  constructor(private $doc: DocumentService, private $jx: JxToasterService) {
+    this.getAccountAndBalance();
+
+    // Binding this keeps this at the class level
+    // Preventing callbacks from making this undefined
+    this.submit = this.submit.bind(this);
+  }
 
   ngOnInit(): void {
   }
@@ -54,19 +73,68 @@ export class UploadComponent implements OnInit {
   ngOnDestroy() {
   }
 
-  submit(data: { [name: string]: any }) {
-    this.busy = true;
-    console.log(data)
+  getAccountAndBalance = () => {
+    const that = this;
+    this.$doc.getUserBalance().
+      then(function (retAccount: any) {
+        that.user.address = retAccount.account;
+        that.user.balance = retAccount.balance;
+      }).catch(function (error) {
 
-    let _hash1 = 'd63a75de5f66284087098fd85381f01ff61d4374f1e05f3e5dd0775e204d605c';
-    let _hash2 = `0x${_hash1}`;
-
-    console.log(_hash2)
-
-    this.$doc.saveHash(_hash2).
-      then(function () { }).catch(function (error) {
-        console.log(error);
-        console.log('Errorrrrrr!!!!');
       });
+  }
+
+  async submit(data: { [name: string]: any }) {
+    this.busy = true;
+
+    let _hash1 = await this.$doc.hashing(data.certificate[0]);
+    let _hash2 = `0x${_hash1}`
+
+    // Update file hash
+    this.transactionInfo.fileHash = _hash2;
+
+    if (_hash2) {
+      let value = {
+        hash: _hash2
+      }
+
+      this.$doc.saveHash(value).
+        then((res: any) => {
+          this.transactionInfo.tx = res.tx;
+          this.transactionInfo.blockNumber = res.receipt.blockNumber;
+          this.$jx.pop(
+            "success",
+            `Hashed and Saved!`,
+            `Certificate was hashed and saved successfully!`,
+            true
+          );
+        }).catch((error) => {
+          this.errorManager(error);
+        });
+    }
+  }
+
+  errorManager(error) {
+    if (error.message.includes('Only hashes that have not been hashed can be stored'))
+      this.$jx.pop(
+        "danger",
+        `Cerificate Already Exists!`,
+        `File has been previously Hashed and Saved!`,
+        true
+      );
+    else if (error.message.includes("must provide an Ethereum address.") || error.message.includes("Access Denied"))
+      this.$jx.pop(
+        "danger",
+        `Access Denied!`,
+        `You are not permitted to access this resource!`,
+        true
+      );
+    else
+      this.$jx.pop(
+        "danger",
+        `Terminated!`,
+        `Something went wrong`,
+        true
+      );
   }
 }
