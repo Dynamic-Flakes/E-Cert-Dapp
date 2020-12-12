@@ -11,8 +11,6 @@ contract Ownable {
     address public student;
     address public verifier;
 
-    uint256 public value;
-
     // event for EVM logging
     event OwnerSet(address indexed oldOwner, address indexed newOwner);
 

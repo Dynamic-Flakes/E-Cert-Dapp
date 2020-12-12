@@ -28,7 +28,7 @@ blockchain will be made
 their verifier via mail
 
  - <b>Verification</b>: this is the process by which a third-party verifies the authenticity of the certificate.
- - Once the verifier receives this hash, they upload it to the UI for verification. The frontend calls on a function in the smart contract in order to verify that the hash was authenticated by the university.
+ - Once the verifier receives the student certificate, they upload it to the UI for verification. The frontend calls on a function in the smart contract in order to verify that the hash was authenticated by the university.
  - The true/false boolean result is then displayed on the frontend,
 in the verifying window
 
