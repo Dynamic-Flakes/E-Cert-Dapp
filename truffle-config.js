@@ -6,6 +6,13 @@ module.exports = {
       port: 8545,
       network_id: "*" // Match any network id
     },
+    live: {
+            host: "192.xx.xx.xx",
+            port: 8545,
+            network_id: "*",
+            gas: 4000000,
+            from: "0x8xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
   },
     plugins: ["solidity-coverage"],
   contracts_directory: './contracts/',

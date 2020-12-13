@@ -60,15 +60,15 @@ contract CertificateRegistry is Ownable {
     {
         require(
             msg.sender != address(0x0),
-            "Error: ensure educator address exist"
+            "Error: ensure owner address exist"
         );
-        DocumentInfo memory docInfo = DocumentInfo({
+        DocumentInfo memory newDocInfo = DocumentInfo({
             issuer: msg.sender,
             timeOfIssue: block.timestamp,
             isStored: true
         });
 
-        documentRegistry[_documentHash] = docInfo;
+        documentRegistry[_documentHash] = newDocInfo;
 
         emit LogNewHashStored(msg.sender, block.timestamp, true);
     }
