@@ -7,8 +7,8 @@
  - No single user can register twice.
  - No hash of a certificate can exist more than one
 
- ### Users:
-There are 3 types of users the system provides support to:
+ ### Actors:
+There are 3 types of actors the system provides support to:
 
  - <b>Educator</b>: This is the certifying authority, which registers new certificates, then issues the desired student that certificate.
  - <b>Student</b>: This is the recipient of the certificate. It first registers itself in the system. He request for a certificate after a course is finished and the stored on-chain
