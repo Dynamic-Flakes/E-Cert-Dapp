@@ -5,7 +5,6 @@ require('chai')
 
 contract('CertificateRegistry', accounts => {
   const [educator, student, verifier] = accounts;
-  console.log({educator})
     // Contract instance
   let certificateRegistryInstance
 
@@ -21,7 +20,6 @@ contract('CertificateRegistry', accounts => {
 describe('deployment', async () => {
     it('should deploys successfully', async () => {
       const address = await certificateRegistryInstance.address
-        console.log({address})
 
       assert.ok(address)
       assert.notEqual(address, 0x0)
@@ -41,7 +39,6 @@ describe('deployment', async () => {
 
     before(async () => {
       result = await certificateRegistryInstance.storeHash(hash1, { from: educator})
-      console.log({result})
     })
 
     it('should only allow contract creator to add hash', async () => {
