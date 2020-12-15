@@ -4,7 +4,8 @@ require('chai')
   .should()
 
 contract('CertificateRegistry', accounts => {
-  const [deployer, student, verifier] = accounts;
+  const [educator, student, verifier] = accounts;
+  console.log({educator})
     // Contract instance
   let certificateRegistryInstance
 
@@ -20,6 +21,8 @@ contract('CertificateRegistry', accounts => {
 describe('deployment', async () => {
     it('should deploys successfully', async () => {
       const address = await certificateRegistryInstance.address
+        console.log({address})
+
       assert.ok(address)
       assert.notEqual(address, 0x0)
       assert.notEqual(address, '')
@@ -29,7 +32,7 @@ describe('deployment', async () => {
 
     it('should sets the owner properly', async () => {
       const contractOwner = await certificateRegistryInstance.contractOwner()
-      assert.equal(contractOwner, deployer, 'has an owner')
+      assert.equal(contractOwner, educator, 'has an owner')
     })
   })
 
@@ -37,21 +40,21 @@ describe('deployment', async () => {
     let result
 
     before(async () => {
-      result = await certificateRegistryInstance.storeHash(hash1, { from: deployer })
+      result = await certificateRegistryInstance.storeHash(hash1, { from: educator})
+      console.log({result})
     })
 
     it('should only allow contract creator to add hash', async () => {
     const event = result.logs[0].args
     const block = await web3.eth.getBlock('latest');
-    const BN = web3.utils.BN;
 
     const expectedBlockNumber = block.number;
     const expectedTimestamp = block.timestamp;
-    const actualBlockNumber = new BN(event.blockNumber).toString()
-    const actualTimestamp = new BN(event.timeOfIssue).toString()
+    const actualBlockNumber = event.blockNumber.toNumber()
+    const actualTimestamp = event.timeOfIssue.toNumber()
 
-      // SUCCESS
-      assert.equal(event.issuer, deployer, 'issuer is correct')
+    // SUCCESS
+      assert.equal(event.issuer, educator, 'issuer is correct')
       assert.equal(actualTimestamp, expectedTimestamp, 'time is correct')
       assert.equal(actualBlockNumber, expectedBlockNumber, 'blockNumber is correct')
       assert.equal(event.isStored, true, 'hash is not stored')
@@ -59,11 +62,11 @@ describe('deployment', async () => {
 
     it('should not store empty input', async () => {
       // FAILURE: Hash must have a value
-      await certificateRegistryInstance.storeHash('', { from: deployer }).should.be.rejected;
+      await certificateRegistryInstance.storeHash('', { from: educator }).should.be.rejected;
     });
 
     it('should reject a hash if one is already stored for the supplied hash', async () => {
-    await certificateRegistryInstance.storeHash(hash1, { from: deployer }).should.be.rejected;
+    await certificateRegistryInstance.storeHash(hash1, { from: educator }).should.be.rejected;
     });
 
    it('should not store hash when user is not owner', async () => {
