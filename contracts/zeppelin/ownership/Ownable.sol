@@ -8,8 +8,6 @@ pragma solidity >=0.4.22 <0.8.0;
  */
 contract Ownable {
     address public contractOwner;
-    address public student;
-    address public verifier;
 
     // event for EVM logging
     event OwnerSet(address indexed oldOwner, address indexed newOwner);
