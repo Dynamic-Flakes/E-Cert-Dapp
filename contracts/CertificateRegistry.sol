@@ -15,6 +15,7 @@ contract CertificateRegistry is Ownable {
     struct DocumentInfo {
         address issuer;
         uint256 timeOfIssue;
+        uint256 blockNumber;
         bool isStored;
     }
 
@@ -28,6 +29,7 @@ contract CertificateRegistry is Ownable {
     event LogNewHashStored(
         address indexed issuer,
         uint256 timeOfIssue,
+        uint256 blockNumber,
         bool isStored
     );
 
@@ -65,12 +67,13 @@ contract CertificateRegistry is Ownable {
         DocumentInfo memory newDocInfo = DocumentInfo({
             issuer: msg.sender,
             timeOfIssue: block.timestamp,
+            blockNumber: block.number,
             isStored: true
         });
 
         documentRegistry[_documentHash] = newDocInfo;
 
-        emit LogNewHashStored(msg.sender, block.timestamp, true);
+        emit LogNewHashStored(msg.sender, block.timestamp, block.number, true);
     }
 
     function verifyHash(bytes32 _documenteHash) public view returns (bool) {

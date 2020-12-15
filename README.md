@@ -58,7 +58,7 @@ in the verifying window
  - <b>Web3.js</b> - (Ethereum JavaScript API: https://github.com/ethereum/web3.js/)
 - <b>Truffle Contract</b> -(Better Ethereum contract abstraction, for Node and the browser):https://www.npmjs.com/package/@truffle/contract
  - <b>MetaMask</b> - (A browser plugin which allows users to make transactions to Ethereum or other networks through browsers, eliminating the need for dedicated user interfaces for Ethereum or other networks: https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en)
-
+ - <b>OpenZeppelin Contracts</b> - OpenZeppelin Contracts is a library for secure smart contract development: https://github.com/OpenZeppelin/openzeppelin-contracts
  - <b>NodeJS</b> - (An open source and cross-platform runtime environment for executing JavaScript code outside of a browser: https://nodejs.org/en/),
  - <b>Angular</b> - (TypeScript-based open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations: https://angular.io/).
 
