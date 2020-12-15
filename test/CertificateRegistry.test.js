@@ -9,7 +9,7 @@ contract('CertificateRegistry', accounts => {
   let certificateRegistryInstance
 
   const hash1 = '0x94f3e4c13989c51472ce78354b5205c5411f82e83c745b6f675e0c9aeb8ab4d1'
-  let _timeOfIssue = Math.floor((new Date).getTime() / 1000);
+  const hash2 = '0x236d57dcd13712aa216d1f24317c32aaed9032bdd8fa83961a53a21ed95ded2d'
 
 // Create a new instance of the contract before each test
   beforeEach('setup contract for each test', async () => {
@@ -40,12 +40,20 @@ describe('deployment', async () => {
       result = await certificateRegistryInstance.storeHash(hash1, { from: deployer })
     })
 
-    it('store certificate hash', async () => {
-    const expected = await web3.utils.toBN(_timeOfIssue)
+    it('should only allow contract creator to add hash', async () => {
+    const event = result.logs[0].args
+    const block = await web3.eth.getBlock('latest');
+    const BN = web3.utils.BN;
+
+    const expectedBlockNumber = block.number;
+    const expectedTimestamp = block.timestamp;
+    const actualBlockNumber = new BN(event.blockNumber).toString()
+    const actualTimestamp = new BN(event.timeOfIssue).toString()
+
       // SUCCESS
-      const event = result.logs[0].args
       assert.equal(event.issuer, deployer, 'issuer is correct')
-      // assert.equal(event.timeOfIssue, expected, 'time is correct')
+      assert.equal(actualTimestamp, expectedTimestamp, 'time is correct')
+      assert.equal(actualBlockNumber, expectedBlockNumber, 'blockNumber is correct')
       assert.equal(event.isStored, true, 'hash is not stored')
     })
 
@@ -54,7 +62,7 @@ describe('deployment', async () => {
       await certificateRegistryInstance.storeHash('', { from: deployer }).should.be.rejected;
     });
 
-    it('should not add hash when hash already exists', async () => {
+    it('should reject a hash if one is already stored for the supplied hash', async () => {
     await certificateRegistryInstance.storeHash(hash1, { from: deployer }).should.be.rejected;
     });
 
@@ -68,9 +76,14 @@ describe('deployment', async () => {
 
     before(async () => {
       validHash = await certificateRegistryInstance.verifyHash(hash1)
+      inValidHash = await certificateRegistryInstance.verifyHash(hash2)
+
     })
     it('should return true for valid document hash', async () => {
     assert.strictEqual(validHash, true, 'Document hash is valid')
+    });
+    it('should return false for invalid document hash', async () => {
+    assert.strictEqual(inValidHash, false, 'Document hash is invalid')
     });
   })
 })
