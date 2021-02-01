@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
-pragma solidity >=0.4.22 <0.8.0;
+pragma solidity >=0.4.22 <0.8.0; //locked compiler
 
 import "./zeppelin/ownership/Ownable.sol";
 
@@ -64,23 +64,32 @@ contract CertificateRegistry is Ownable {
             msg.sender != address(0x0),
             "Error: ensure owner address exist"
         );
-        DocumentInfo memory newDocInfo = DocumentInfo({
-            issuer: msg.sender,
-            timeOfIssue: block.timestamp,
-            blockNumber: block.number,
-            isStored: true
-        });
+        DocumentInfo memory newDocInfo =
+            DocumentInfo({
+                issuer: msg.sender,
+                timeOfIssue: block.timestamp,
+                blockNumber: block.number,
+                isStored: true
+            });
 
         documentRegistry[_documentHash] = newDocInfo;
 
         emit LogNewHashStored(msg.sender, block.timestamp, block.number, true);
     }
 
-    function verifyHash(bytes32 _documenteHash) public view returns (bool) {
+    function verifyCertificate(bytes32 _documenteHash, uint256 _blockNumber)
+        external
+        view
+        returns (bool)
+    {
         bool isVerified = false;
-        if (documentRegistry[_documenteHash].isStored) {
-            isVerified = true;
-            return isVerified;
+
+        if (documentRegistry[_documenteHash].blockNumber == _blockNumber) {
+            // check if hash exists on blocknumber or not
+            if (documentRegistry[_documenteHash].isStored) {
+                isVerified = true;
+                return isVerified;
+            }
         }
         return isVerified;
     }
