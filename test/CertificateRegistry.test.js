@@ -7,14 +7,14 @@ contract('CertificateRegistry', accounts => {
   const [educator, student, verifier] = accounts;
     // Contract instance
   let certificateRegistryInstance
-
   const hash1 = '0x94f3e4c13989c51472ce78354b5205c5411f82e83c745b6f675e0c9aeb8ab4d1'
   const hash2 = '0x236d57dcd13712aa216d1f24317c32aaed9032bdd8fa83961a53a21ed95ded2d'
-
+  let block
+  let actualBlockNumber
 // Create a new instance of the contract before each test
   beforeEach('setup contract for each test', async () => {
     certificateRegistryInstance = await CertificateRegistry.deployed()
-
+    block = await web3.eth.getBlock('latest');
   })
 
 describe('deployment', async () => {
@@ -43,11 +43,11 @@ describe('deployment', async () => {
 
     it('should only allow contract creator to add hash', async () => {
     const event = result.logs[0].args
-    const block = await web3.eth.getBlock('latest');
+
 
     const expectedBlockNumber = block.number;
     const expectedTimestamp = block.timestamp;
-    const actualBlockNumber = event.blockNumber.toNumber()
+    actualBlockNumber = event.blockNumber.toNumber()
     const actualTimestamp = event.timeOfIssue.toNumber()
 
     // SUCCESS
@@ -71,19 +71,24 @@ describe('deployment', async () => {
     await certificateRegistryInstance.storeHash(hash1, { from: verifier }).should.be.rejected;
     });
  })
-  describe('verifyHash', async () => {
+  describe('verifyCertificateData', async () => {
     let validHash
 
+console.log('ia here')
     before(async () => {
-      validHash = await certificateRegistryInstance.verifyHash(hash1)
-      inValidHash = await certificateRegistryInstance.verifyHash(hash2)
-
+      const blockNumber = block.number;
+      validHash = await certificateRegistryInstance.verifyCertificateData(hash1,actualBlockNumber)
+      inValidHash = await certificateRegistryInstance.verifyCertificateData(hash2,actualBlockNumber)
+      inValidBlockNumber = await certificateRegistryInstance.verifyCertificateData(hash1,blockNumber)
     })
     it('should return true for valid document hash', async () => {
     assert.strictEqual(validHash, true, 'Document hash is valid')
     });
     it('should return false for invalid document hash', async () => {
     assert.strictEqual(inValidHash, false, 'Document hash is invalid')
+    });
+     it('should return false for invalid block number', async () => {
+    assert.strictEqual(inValidBlockNumber, false, 'Block number is invalid')
     });
   })
 })

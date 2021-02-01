@@ -77,7 +77,7 @@ contract CertificateRegistry is Ownable {
         emit LogNewHashStored(msg.sender, block.timestamp, block.number, true);
     }
 
-    function verifyCertificate(bytes32 _documenteHash, uint256 _blockNumber)
+    function verifyCertificateData(bytes32 _documenteHash, uint256 _blockNumber)
         external
         view
         returns (bool)
