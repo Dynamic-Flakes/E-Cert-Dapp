@@ -22,6 +22,13 @@ export class SearchComponent implements OnInit {
 
   config: FieldConfig[] = [
     {
+      type: 'input',
+      label: 'Enter block number',
+      placeholder: 'Enter block number',
+      name: 'blockNumber',
+      validation: [Validators.required]
+    },
+    {
       type: 'filechooser',
       label: 'Drag and Drop Files',
       name: 'certificate',
@@ -79,14 +86,17 @@ export class SearchComponent implements OnInit {
 
   async submit(data: { [name: string]: any }) {
     this.busy = true;
+    console.log(data)
 
     let _hash1 = await this.$doc.hashing(data.certificate[0]);
     let _hash2 = `0x${_hash1}`
 
-    if (_hash2) {
+    if (_hash2 && data['blockNumber']) {
       let value = {
-        hash: _hash2
+        hash: _hash2,
+        blockNumber: data['blockNumber']
       }
+      console.log(value)
 
       this.$doc.verifyHash(value).
         then((status) => {
@@ -111,6 +121,8 @@ export class SearchComponent implements OnInit {
   }
 
   errorManager(error) {
+    console.log(error);
+
     if (error.message.includes('Only hashes that have not been hashed can be stored'))
       this.$jx.pop(
         "danger",

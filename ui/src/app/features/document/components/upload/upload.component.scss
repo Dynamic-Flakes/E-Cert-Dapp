@@ -1,8 +1,14 @@
 .details {
     display: flex;
-    gap: 20px;
+    gap: 4px;
     overflow-wrap: anywhere;
     span.key {
         white-space: nowrap;
+        padding-bottom: 5px;
     }
+}
+
+::ng-deep input {
+    border: 2px solid #ff2b87 !important;
+    background: transparent !important;
 }

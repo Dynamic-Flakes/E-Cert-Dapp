@@ -114,7 +114,8 @@ export class DocumentService {
       transferContract.setProvider(that.web3);
 
       transferContract.deployed().then(function (instance) {
-        return instance.verifyHash(value.hash);
+        console.log('contractAddress', instance)
+        return instance.verifyCertificateData(value.hash, value.blockNumber);
       }).then(function (status) {
         return resolve(status);
       }).catch(function (error) {
