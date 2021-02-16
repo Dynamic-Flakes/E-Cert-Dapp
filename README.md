@@ -110,6 +110,13 @@ in the verifying window
 
 ![Alt text](./diagrams/cost-ropsten.png?raw=true "gas cost")
 
+### Contract deployment gas cost fee on ropsten etherscan explorer
+- Open a terminal and run:
+ `truffle run ropsten or yarn run ropsten`
+
+![Alt text](./diagrams/etherscan.png?raw=true "gas cost")
+
+
 
 ### Contract Graph
 - Use Solidity Visual Developer to generate the graph for the contract
