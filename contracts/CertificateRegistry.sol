@@ -23,7 +23,7 @@ contract CertificateRegistry is Ownable {
       A mapping of the document hash to the documentinfo that was issued
       This mapping is used to keep track of every certification document initiated for every student by an educator.
      */
-    mapping(bytes32 => DocumentInfo) public documentRegistry;
+    mapping(bytes32 => DocumentInfo) documentRegistry;
 
     // event for EVM logging
     event LogNewHashStored(

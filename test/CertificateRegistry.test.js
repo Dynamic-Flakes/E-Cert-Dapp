@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const CertificateRegistry = artifacts.require('./CertificateRegistry.sol')
 require('chai')
   .use(require('chai-as-promised'))
@@ -12,9 +13,10 @@ contract('CertificateRegistry', accounts => {
   let block
   let actualBlockNumber
 // Create a new instance of the contract before each test
-  beforeEach('setup contract for each test', async () => {
-    certificateRegistryInstance = await CertificateRegistry.deployed()
-    block = await web3.eth.getBlock('latest');
+  before('setup contract for test', async () => {
+    certificateRegistryInstance = await CertificateRegistry.new()
+    // let receipt = await web3.eth.getTransactionReceipt(certificateRegistryInstance.transactionHash);
+    // console.log({gasUsage:receipt.gasUsed})
   })
 
 describe('deployment', async () => {
@@ -39,16 +41,18 @@ describe('deployment', async () => {
 
     before(async () => {
       result = await certificateRegistryInstance.storeHash(hash1, { from: educator})
+      block = await web3.eth.getBlock('latest');
+
     })
 
     it('should only allow contract creator to add hash', async () => {
     const event = result.logs[0].args
 
-
     const expectedBlockNumber = block.number;
     const expectedTimestamp = block.timestamp;
     actualBlockNumber = event.blockNumber.toNumber()
     const actualTimestamp = event.timeOfIssue.toNumber()
+    console.log({expectedBlockNumber,actualBlockNumber})
 
     // SUCCESS
       assert.equal(event.issuer, educator, 'issuer is correct')
@@ -75,7 +79,8 @@ describe('deployment', async () => {
     let validHash
 
     before(async () => {
-      const blockNumber = block.number;
+      const blockNo = await web3.eth.getBlock('latest');
+      const blockNumber = blockNo.number;
       validHash = await certificateRegistryInstance.verifyCertificateData(hash1,actualBlockNumber)
       inValidHash = await certificateRegistryInstance.verifyCertificateData(hash2,actualBlockNumber)
       inValidBlockNumber = await certificateRegistryInstance.verifyCertificateData(hash1,blockNumber)

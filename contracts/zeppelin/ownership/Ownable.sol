@@ -21,12 +21,6 @@ contract Ownable {
         emit OwnerSet(address(0), contractOwner);
     }
 
-    // Events
-    event OwnershipTransferred(
-        address indexed previousOwner,
-        address indexed newOwner
-    );
-
     /**
      * @dev Throws if called by any account other than the owner.
      */
