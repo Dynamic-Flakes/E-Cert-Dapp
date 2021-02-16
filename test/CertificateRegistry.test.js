@@ -74,7 +74,6 @@ describe('deployment', async () => {
   describe('verifyCertificateData', async () => {
     let validHash
 
-console.log('ia here')
     before(async () => {
       const blockNumber = block.number;
       validHash = await certificateRegistryInstance.verifyCertificateData(hash1,actualBlockNumber)

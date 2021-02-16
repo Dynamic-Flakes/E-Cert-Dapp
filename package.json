@@ -17,6 +17,7 @@
     "console": "truffle console --network development",
     "coverage": "truffle run coverage",
     "test": "truffle test",
+    "lint": "solium -d contracts && eslint .",
     "solgraph": "solgraph contracts/CertificateRegistry.sol  > doc/CertificateRegistry.dot && dot -Tpng doc/CertificateRegistry.dot -o doc/CertificateRegistry.png",
     "start:ganache": "cd Downloads && ./ganache-2.5.4-linux-x86_64.AppImage"
   },
@@ -25,6 +26,9 @@
     "chai-as-promised": "^7.1.1"
   },
   "devDependencies": {
+    "eslint": "^7.20.0",
+    "eth-gas-reporter": "^0.2.20",
+    "ethlint": "^1.2.5",
     "solgraph": "^0.3.3",
     "solidity-coverage": "^0.7.13",
     "solium": "^1.2.5"

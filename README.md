@@ -95,3 +95,17 @@ in the verifying window
  `truffle run coverage or yarn run coverage`
 
 ![Alt text](./diagrams/test-coverage.png?raw=true "Test coverage results")
+
+
+
+### Contract Graph
+- Use Solidity Visual Developer to generate the graph for the contract
+
+![Alt text](./diagrams/contractGraph.png?raw=true "Test coverage results")
+
+
+
+### Contract UML Diagram
+- Use Solidity Visual Developer to generate the UML with PlantUML embedded
+
+![Alt text](./diagrams/contract-uml.png?raw=true "Test coverage results")
