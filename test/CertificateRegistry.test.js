@@ -52,7 +52,6 @@ describe('deployment', async () => {
     const expectedTimestamp = block.timestamp;
     actualBlockNumber = event.blockNumber.toNumber()
     const actualTimestamp = event.timeOfIssue.toNumber()
-    console.log({expectedBlockNumber,actualBlockNumber})
 
     // SUCCESS
       assert.equal(event.issuer, educator, 'issuer is correct')
