@@ -97,6 +97,19 @@ in the verifying window
 ![Alt text](./diagrams/test-coverage.png?raw=true "Test coverage results")
 
 
+### Contract deployment gas cost on local network - Ganache
+- Open a terminal and run:
+ `truffle run migrate or yarn run migrate`
+
+![Alt text](./diagrams/cost-local.png?raw=true "gas cost")
+
+
+### Contract deployment gas cost on ropsten network - testnet on infuria
+- Open a terminal and run:
+ `truffle run ropsten or yarn run ropsten`
+
+![Alt text](./diagrams/cost-ropsten.png?raw=true "gas cost")
+
 
 ### Contract Graph
 - Use Solidity Visual Developer to generate the graph for the contract

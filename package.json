@@ -15,6 +15,8 @@
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
     "console": "truffle console --network development",
+    "rinkeby":"truffle migrate -f 2 --network rinkeby",
+    "ropsten":"truffle migrate --network ropsten",
     "coverage": "truffle run coverage",
     "test": "truffle test",
     "lint": "solium -d contracts && eslint .",
@@ -22,6 +24,7 @@
     "start:ganache": "cd Downloads && ./ganache-2.5.4-linux-x86_64.AppImage"
   },
   "dependencies": {
+    "@truffle/hdwallet-provider": "^1.2.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1"
   },
