@@ -1,7 +1,7 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const fs = require('fs')
 const mnemonic = fs.readFileSync('.secret').toString().trim()
-const infuraProjectId = 'cdebbef6def6471fa589c3cbab0fefd3'
+const infuraProjectId = 'e30562b89a9c417b9245fe550b99d7d2'
 
 module.exports = {
   networks: {
