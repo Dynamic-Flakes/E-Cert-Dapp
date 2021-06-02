@@ -142,16 +142,16 @@ The issuer puts the certificate on the blockchain by storing it in the global va
 Can be called by anyone.
 
 #### Interact with the contract on your local development network
-- run 'yarn console' in your Truffle console, create an instance of the deployed contract
+- run ```yarn console``` in your Truffle console, create an instance of the deployed contract
 - Declare the contract owner:
-```let instance = await DocStamp.deployed()``
+```let instance = await DocStamp.deployed()```
 - Declare the contract owner:
 ```let owner = await instance.owningAuthority()```
 
 - Issue the certificate:
-let result = await instance.storeHash("0x94f3e4c13989c51472ce78354b5205c5411f82e83c745b6f675e0c9aeb8ab4d1", {from: owner})
+```let result = await instance.storeHash("0x94f3e4c13989c51472ce78354b5205c5411f82e83c745b6f675e0c9aeb8ab4d1", {from: owner})```
 
 - Run result.logs to view the full certificate details.
 
 - Run the certificate verification:
-```let verify = await instance.verifyCertificateData("0x94f3e4c13989c51472ce78354b5205c5411f82e83c745b6f675e0c9aeb8ab4d1", {from: owner})
+```let verify = await instance.verifyCertificateData("0x94f3e4c13989c51472ce78354b5205c5411f82e83c745b6f675e0c9aeb8ab4d1", {from: owner})```
