@@ -16,7 +16,6 @@ contract('CertificateRegistry', accounts => {
   before('setup contract for test', async () => {
     certificateRegistryInstance = await CertificateRegistry.new({ from: educator })
     // let receipt = await web3.eth.getTransactionReceipt(certificateRegistryInstance.transactionHash);
-    // console.log({gasUsage:receipt.gasUsed})
   })
 
 describe('deployment', async () => {

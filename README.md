@@ -131,7 +131,7 @@ in the verifying window
 ![Alt text](./diagrams/contract-uml.png?raw=true "Test coverage results")
 
 ### CertificateRegistry:
-- This is the main contract. The contract handles the generation and verification of certificates.
+- This is the main contract. The contract handles the generation and verification of certificates as shown below.
 
 - storeHash() — generates a certificate by calculating a hash of the student name and details.
 Can be called only by the owner.
