@@ -1,0 +1,39 @@
+input {
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid var(--xplorer-root-node-color);
+    outline: none;
+    padding: 10px 15px;
+    color: var(--xplorer-root-node-color);
+}
+
+input:focus {
+    color: var(--jf-input-focus-color);
+}
+
+.dynamic-field {
+    display: flex;
+    /* display: grid;
+    grid-template-columns: 1fr 3fr; */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dynamic-field label {
+    text-align: right;
+    margin-right: 10px;
+    color: var(--select-color);
+}
+
+input.ng-invalid.ng-dirty.ng-touched {
+    border-color: rgb(203, 50, 50);
+}
+
+@media (max-width: 620px) {
+    .dynamic-field {
+        grid-template-columns: 1fr;
+        grid-row-gap: 10px;
+    }
+}

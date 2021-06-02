@@ -1,87 +1,95 @@
-pragma solidity >=0.4.22 <0.8.0;
+// SPDX-License-Identifier: Apache-2.0
 
-import "./Ownable.sol";
+pragma solidity >=0.4.22 <0.8.0; //locked compiler
+
+import "./zeppelin/ownership/Ownable.sol";
 
 contract CertificateRegistry is Ownable {
     /**
      * The Certificate Document info structure: every certificate info is composed of:
      * - documentHash: Hash of the document generated off-chain
-     * - issuer: institution that issue the document
-     * - timeOfIssue - time the document hash was generated.
+     * - from: account of the institution that issue the document
+    * - isStored - a flag to show that a hash is stored or not.
+
      */
     struct DocumentInfo {
         address issuer;
-        bytes32 documentHash;
         uint256 timeOfIssue;
-        bool exit;
+        uint256 blockNumber;
+        bool isStored;
     }
 
     /*
-      A mapping each student document to their ID
+      A mapping of the document hash to the documentinfo that was issued
       This mapping is used to keep track of every certification document initiated for every student by an educator.
      */
-    mapping(bytes32 => DocumentInfo) private documentRegistry;
+    mapping(bytes32 => DocumentInfo) documentRegistry;
 
-    /**
-     * This event is triggered for store hash notification messages and outputs the following:
-     * - issuer - owner of the contract
-     * - documentHash
-     * - timeOfIssue
-     */
-    event HashAdded(
+    // event for EVM logging
+    event LogNewHashStored(
         address indexed issuer,
-        bytes32 documentHash,
-        uint256 _timeOfIssue
+        uint256 timeOfIssue,
+        uint256 blockNumber,
+        bool isStored
     );
 
-    modifier noHashExistsYet(bytes32 _documentHash) {
-        require(
-            documentRegistry[_documentHash].exist == false,
-            "Error: this hash already exists in contract"
-        );
+    modifier onlyNotHashed(bytes32 _documentHash) {
+        require(!isHashStored(_documentHash), "Hash not stored");
+        _;
+    }
+
+    modifier onlyHashValueNotEmpty(bytes32 _documentHash) {
+        require(_documentHash.length > 0, "Hash value not empty");
         _;
     }
 
     /*
      * Record a new hash request on behalf of a student
      * The sender of message call is the educator itself
-     * @param {string} _document Hash of the sutuednt submitted for storage on-chain
+     * @param {string} _documentHash: Hash of the sutuednt submitted for storage on-chain
      */
     function storeHash(bytes32 _documentHash)
         public
         onlyOwner
-        noHashExistsYet(_documentHash)
+        onlyHashValueNotEmpty(_documentHash)
+        onlyNotHashed(_documentHash)
     {
-        require(_documentHash.length == 46);
-        DocumentInfo memory docInfo = DocumentInfo({
-            documentHash: _documentHash,
-            issuer: msg.sender,
-            timeOfIssue: block.timestamp,
-            exit: true
-        });
+        require(msg.sender != address(0x0), "Ensure owner address exist");
+        DocumentInfo memory newDocInfo =
+            DocumentInfo({
+                issuer: msg.sender,
+                timeOfIssue: block.timestamp,
+                blockNumber: block.number,
+                isStored: true
+            });
 
-        documentRegistry[_documentHash] = docInfo;
+        documentRegistry[_documentHash] = newDocInfo;
 
-        // creates the event, to be used to query all the certificates
-        emit HashAdded(msg.sender, _documentHash, block.timestamp);
+        emit LogNewHashStored(msg.sender, block.timestamp, block.number, true);
     }
 
-    function readHashedCertificate(bytes32 _hash)
-        public
+   function owningAuthority() external view returns (address) {
+    return contractOwner;
+  }
+
+    function verifyCertificateData(bytes32 _documenteHash, uint256 _blockNumber)
+        external
         view
-        returns (
-            bytes32,
-            address,
-            uint256,
-            bool
-        )
+        returns (bool)
     {
-        return (
-            _hash,
-            documentRegistry[_hash].documentHash,
-            documentRegistry[_hash].issuer,
-            documentRegistry[_hash].timeOfIssue,
-            documentRegistry[_hash].exit
-        );
+        bool isVerified = false;
+
+        if (documentRegistry[_documenteHash].blockNumber == _blockNumber) {
+            // check if hash exists on blocknumber or not
+            if (documentRegistry[_documenteHash].isStored) {
+                isVerified = true;
+                return isVerified;
+            }
+        }
+        return isVerified;
+    }
+
+    function isHashStored(bytes32 _documentHash) internal view returns (bool) {
+        return documentRegistry[_documentHash].isStored;
     }
 }

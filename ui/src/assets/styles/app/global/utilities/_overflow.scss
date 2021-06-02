@@ -1,0 +1,6 @@
+@each $value in $overflows {
+  .jx-of-#{$value} { overflow: $value !important; };
+
+  .jx-of-x-#{$value} { overflow: $value !important; };
+  .jx-of-y-#{$value} { overflow: $value !important; };
+}

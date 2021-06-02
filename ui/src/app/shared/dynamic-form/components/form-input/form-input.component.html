@@ -1,0 +1,4 @@
+<div class="dynamic-field form-input" [formGroup]="group">
+    <!-- <label *ngIf="config.label">{{ config.label }}</label> -->
+    <input [type]="config.valueType" [attr.placeholder]="config.placeholder" [formControlName]="config.name">
+</div>

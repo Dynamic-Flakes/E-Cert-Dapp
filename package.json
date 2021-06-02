@@ -6,9 +6,36 @@
   "repository": "https://github.com/Dynamic-Flakes/E-Cert-Dapp.git",
   "author": "melitus <asmelitus@gmail.com>",
   "license": "MIT",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
   "scripts": {
+    "benchmark": "truffle test ./benchmark/*",
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
-    "console":"truffle console --network development"
+    "console": "truffle console --network rinkeby",
+    "rinkeby": "truffle migrate -f 2 --network rinkeby",
+    "ropsten": "truffle migrate -f 2 --network ropsten",
+    "coverage": "truffle run coverage",
+    "size":"truffle run contract-size",
+    "test": "truffle test",
+    "lint": "solium -d contracts && eslint .",
+    "solgraph": "solgraph contracts/CertificateRegistry.sol  > doc/CertificateRegistry.dot && dot -Tpng doc/CertificateRegistry.dot -o doc/CertificateRegistry.png",
+    "start:ganache": "cd Downloads && ./ganache-2.5.4-linux-x86_64.AppImage"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.2.2",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "truffle-contract-size": "^2.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eth-gas-reporter": "^0.2.20",
+    "ethlint": "^1.2.5",
+    "solgraph": "^0.3.3",
+    "solidity-coverage": "^0.7.13",
+    "solium": "^1.2.5"
   }
 }

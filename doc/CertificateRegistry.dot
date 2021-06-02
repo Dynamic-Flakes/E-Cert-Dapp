@@ -1,0 +1,8 @@
+strict digraph {
+  storeHash
+  LogNewHashStored
+  verifyHash [color=yellow]
+  isHashStored [color=gray]
+  storeHash -> LogNewHashStored
+}
+

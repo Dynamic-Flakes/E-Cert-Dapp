@@ -1,0 +1,20 @@
+<app-main-layout>
+    <div class="document-wrap">
+        <div class="-tab-wrapper">
+            <div class="-tab-nav">
+                <ul class="-tab-group">
+                    <li class="-tab-trigger" routerLink="/cert/upload" [class.active]="viewMode == 'upload'" rel="upload" (click)="updateTitle('upload')">
+                        Upload
+                    </li>
+                    <li class="-tab-trigger" routerLink="/cert/verify" [class.active]="viewMode == 'verify'" rel="verify" (click)="updateTitle('verify')">
+                        Verify
+                    </li>
+                </ul>
+                <span class="title">{{title}}</span>
+            </div>
+
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</app-main-layout>
