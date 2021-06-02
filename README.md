@@ -129,3 +129,29 @@ in the verifying window
 - Use Solidity Visual Developer to generate the UML with PlantUML embedded
 
 ![Alt text](./diagrams/contract-uml.png?raw=true "Test coverage results")
+
+### CertificateRegistry:
+- This is the main contract. The contract handles the generation and verification of certificates.
+
+- storeHash() — generates a certificate by calculating a hash of the student name and details.
+Can be called only by the owner.
+Emits a certificate generation event with the timestamp.
+The issuer puts the certificate on the blockchain by storing it in the global variable records by passing records[certificate] = msg.sender.
+- owningAuthority() — returns the address of issuer/authority.
+- verifyCertificateData() — calculates a hash of the student name and details, and checks if the contract is on the blockchain.
+Can be called by anyone.
+
+#### Interact with the contract on your local development network
+- run 'yarn console' in your Truffle console, create an instance of the deployed contract
+- Declare the contract owner:
+```let instance = await DocStamp.deployed()``
+- Declare the contract owner:
+```let owner = await instance.owningAuthority()```
+
+- Issue the certificate:
+let result = await instance.storeHash("0x94f3e4c13989c51472ce78354b5205c5411f82e83c745b6f675e0c9aeb8ab4d1", {from: owner})
+
+- Run result.logs to view the full certificate details.
+
+- Run the certificate verification:
+```let verify = await instance.verifyCertificateData("0x94f3e4c13989c51472ce78354b5205c5411f82e83c745b6f675e0c9aeb8ab4d1", {from: owner})

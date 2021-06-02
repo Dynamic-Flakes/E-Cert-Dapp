@@ -68,6 +68,10 @@ contract CertificateRegistry is Ownable {
         emit LogNewHashStored(msg.sender, block.timestamp, block.number, true);
     }
 
+   function owningAuthority() external view returns (address) {
+    return contractOwner;
+  }
+
     function verifyCertificateData(bytes32 _documenteHash, uint256 _blockNumber)
         external
         view
