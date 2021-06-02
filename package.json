@@ -14,10 +14,11 @@
     "benchmark": "truffle test ./benchmark/*",
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
-    "console": "truffle console --network development",
-    "rinkeby":"truffle migrate -f 2 --network rinkeby",
-    "ropsten":"truffle migrate --network ropsten",
+    "console": "truffle console --network rinkeby",
+    "rinkeby": "truffle migrate -f 2 --network rinkeby",
+    "ropsten": "truffle migrate -f 2 --network ropsten",
     "coverage": "truffle run coverage",
+    "size":"truffle run contract-size",
     "test": "truffle test",
     "lint": "solium -d contracts && eslint .",
     "solgraph": "solgraph contracts/CertificateRegistry.sol  > doc/CertificateRegistry.dot && dot -Tpng doc/CertificateRegistry.dot -o doc/CertificateRegistry.png",
@@ -26,7 +27,8 @@
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.2.2",
     "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1"
+    "chai-as-promised": "^7.1.1",
+    "truffle-contract-size": "^2.0.1"
   },
   "devDependencies": {
     "eslint": "^7.20.0",

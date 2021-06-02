@@ -34,18 +34,12 @@ contract CertificateRegistry is Ownable {
     );
 
     modifier onlyNotHashed(bytes32 _documentHash) {
-        require(
-            !isHashStored(_documentHash),
-            "Error: Only hashes that have not been hashed can be stored"
-        );
+        require(!isHashStored(_documentHash), "Hash not stored");
         _;
     }
 
     modifier onlyHashValueNotEmpty(bytes32 _documentHash) {
-        require(
-            _documentHash.length > 0,
-            "Error: Error: hash value should not be empty"
-        );
+        require(_documentHash.length > 0, "Hash value not empty");
         _;
     }
 
@@ -60,10 +54,7 @@ contract CertificateRegistry is Ownable {
         onlyHashValueNotEmpty(_documentHash)
         onlyNotHashed(_documentHash)
     {
-        require(
-            msg.sender != address(0x0),
-            "Error: ensure owner address exist"
-        );
+        require(msg.sender != address(0x0), "Ensure owner address exist");
         DocumentInfo memory newDocInfo =
             DocumentInfo({
                 issuer: msg.sender,

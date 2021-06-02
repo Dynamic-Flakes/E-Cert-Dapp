@@ -1,7 +1,7 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const fs = require('fs')
 const mnemonic = fs.readFileSync('.secret').toString().trim()
-const infuraProjectId = 'e30562b89a9c417b9245fe550b99d7d2'
+const infuraProjectId = '7c5a9afbfcbb49d2b85574729756aa70'
 
 module.exports = {
   networks: {
@@ -31,6 +31,7 @@ module.exports = {
             gas: 3000000,
             gasPrice: 100000000000
         },
+
      ropsten: {
             provider: () =>
                 new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/${infuraProjectId}`),
@@ -47,7 +48,7 @@ module.exports = {
       gasPrice: 2,
     },
   },
-    plugins: ["solidity-coverage"],
+    plugins: ["solidity-coverage",'truffle-contract-size'],
   contracts_directory: './contracts/',
   contracts_build_directory: './abis/',
   compilers: {
