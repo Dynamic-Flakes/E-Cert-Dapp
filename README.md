@@ -141,10 +141,12 @@ The issuer puts the certificate on the blockchain by storing it in the global va
 - verifyCertificateData() — calculates a hash of the student name and details, and checks if the contract is on the blockchain.
 Can be called by anyone.
 
+Since CertificateRegistry inherits from Ownable, Ownable will be deployed together with CertificateRegistry.
+
 #### Interact with the contract on your local development network
 - run ```yarn console``` in your Truffle console, create an instance of the deployed contract
 - Declare the contract owner:
-```let instance = await DocStamp.deployed()```
+```let instance = await CertificateRegistry.deployed()```
 - Declare the contract owner:
 ```let owner = await instance.owningAuthority()```
 

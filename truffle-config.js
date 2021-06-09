@@ -17,6 +17,18 @@ module.exports = {
             gas: 4000000,
             from: "0x8xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         },
+  mainnet: {
+      provider: function() {
+        return new HDWalletProvider(
+          process.env.MNEMONIC,
+          `https://mainnet.infura.io/${process.env.INFURA_API_KEY}`
+        )
+      },
+      gas: 5000000, // Gas limit used for deploys. Default is 4712388.
+      gasPrice: 25000000000, //Gas price in Wei
+      confirmations: 2,
+      network_id: 1
+    },
     kovan: {
             provider: () =>
                 new HDWalletProvider(mnemonic, `https://kovan.infura.io/v3/${infuraProjectId}`),
