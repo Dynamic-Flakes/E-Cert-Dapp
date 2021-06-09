@@ -40,6 +40,16 @@ describe('deployment', async () => {
 
     before(async () => {
       result = await certificateRegistryInstance.storeHash(hash1, { from: educator})
+      // console.log({result})
+       let gasUsed = result.receipt.gasUsed;
+        console.log("gasUsed: " + gasUsed + " units");
+        let  gasPrice = 20000000000
+        let gasCost = gasUsed*gasPrice;
+        console.log("gasCost (wei): " + gasCost + " wei");
+
+        let gasCostEth = web3.fromWei(gasCost, 'ether')
+        console.log("gasCost (ether): " + gasCostEth + " ether");
+
       block = await web3.eth.getBlock('latest');
 
     })
