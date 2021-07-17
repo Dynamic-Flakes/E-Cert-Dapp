@@ -1,7 +1,7 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const fs = require('fs')
 const mnemonic = fs.readFileSync('.secret').toString().trim()
-const infuraProjectId = '7c5a9afbfcbb49d2b85574729756aa70'
+const infuraProjectId = 'c3d163f40507436ebc36c6fe5dd2c1a1'
 
 module.exports = {
   networks: {
@@ -10,18 +10,11 @@ module.exports = {
       port: 8545,
       network_id: "*" // Match any network id
     },
-    live: {
-            host: "192.xx.xx.xx",
-            port: 8545,
-            network_id: "*",
-            gas: 4000000,
-            from: "0x8xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        },
   mainnet: {
       provider: function() {
         return new HDWalletProvider(
-          process.env.MNEMONIC,
-          `https://mainnet.infura.io/${process.env.INFURA_API_KEY}`
+          mnemonic,
+          `https://mainnet.infura.io/v3/${infuraProjectId}`
         )
       },
       gas: 5000000, // Gas limit used for deploys. Default is 4712388.

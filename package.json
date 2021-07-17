@@ -17,7 +17,7 @@
     "console": "truffle console --network ropsten",
     "rinkeby": "truffle migrate -f 2 --network rinkeby",
     "ropsten": "truffle migrate -f 2 --network ropsten",
-    "mainnet": "truffle migrate -f 2 --network mainnet",
+    "mainnet": "truffle migrate --reset --network mainnet",
     "coverage": "truffle run coverage",
     "networks":"truffle networks",
     "size":"truffle run contract-size",
